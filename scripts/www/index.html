@@ -1,0 +1,2306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0E2540">
+<title>消防救援站 · 2026年度人员休假统计</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E2540'/%3E%3Cpath d='M32 12c2.5 8-5 12-5 20a8 8 0 0 0 16 0c0-3-1-5-2-7 1 2 2 4 0 6-2 4-6 4-6 0 1-6 10-9 0-19z' fill='%23F59E2E'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --navy-950:#0B1F36; --navy-900:#0E2540; --navy-800:#13314F; --navy-700:#1B4370;
+  --blue:#1461B3; --blue-bg:#E7F0FA; --blue-line:#C9DDF3;
+  --orange:#D97A1B; --orange-bg:#FCF0E1; --orange-line:#F3D9B8;
+  --red:#CE4440; --red-bg:#FBE9E8; --red-line:#F2C9C7;
+  --green:#2E9366; --green-bg:#E6F4EC; --green-line:#C2E4D3;
+  --ink:#1F2A37; --ink2:#5B6B7C; --ink3:#8CA0B3;
+  --line:#E4EAF2; --line2:#EEF2F7;
+  --bg:#F2F5F9; --card:#FFFFFF;
+  --shadow:0 1px 2px rgba(13,34,56,.06),0 2px 8px rgba(13,34,56,.04);
+  --radius:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);font-size:14px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit;color:var(--ink)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:4px}
+a{color:var(--blue);text-decoration:none}
+
+/* ============ 布局 ============ */
+.app{display:flex;min-height:100vh}
+
+/* 侧边栏 */
+.sidebar{
+  width:238px;flex:0 0 238px;background:linear-gradient(180deg,var(--navy-900) 0%,var(--navy-950) 100%);
+  color:#C9D6E4;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;z-index:50;
+}
+.brand{display:flex;align-items:center;gap:11px;padding:22px 18px 18px;border-bottom:1px solid rgba(255,255,255,.07)}
+.brand-logo{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#F59E2E,#E0761C);display:flex;align-items:center;justify-content:center;color:#fff;flex:0 0 38px}
+.brand-name{font-size:15.5px;font-weight:700;color:#F4F7FB;letter-spacing:.5px;line-height:1.25}
+.brand-sub{font-size:11.5px;color:#8FA6BD;margin-top:2px}
+.nav{padding:14px 10px;flex:1;display:flex;flex-direction:column;gap:3px}
+.nav-label{font-size:11px;color:#6E87A0;letter-spacing:1.5px;padding:8px 10px 6px}
+.nav-item{
+  display:flex;align-items:center;gap:10px;padding:10px 11px;border-radius:9px;color:#B9C9DA;
+  font-size:13.5px;font-weight:500;border:none;background:transparent;text-align:left;width:100%;position:relative;transition:background .15s,color .15s;
+}
+.nav-item svg{width:18px;height:18px;flex:0 0 18px;opacity:.85}
+.nav-item:hover{background:rgba(255,255,255,.06);color:#E8EFF6}
+.nav-item.active{background:rgba(255,255,255,.1);color:#fff;font-weight:600}
+.nav-item.active::before{content:"";position:absolute;left:-10px;top:8px;bottom:8px;width:3px;border-radius:0 3px 3px 0;background:#F59E2E}
+.nav-item .nav-badge{margin-left:auto;font-size:11px;background:rgba(255,255,255,.1);border-radius:20px;padding:1px 7px;color:#AFC2D5}
+.nav-foot{padding:14px 16px 16px;border-top:1px solid rgba(255,255,255,.07)}
+.nav-foot .today-line{font-size:12px;color:#8FA6BD;display:flex;align-items:center;gap:7px}
+.nav-foot .today-line svg{width:14px;height:14px}
+.nav-foot .reset-btn{margin-top:10px;font-size:12px;color:#7E96AF;background:none;border:none;display:flex;align-items:center;gap:6px;padding:4px 0}
+.nav-foot .reset-btn:hover{color:#E8EFF6}
+.nav-foot .reset-btn.danger{color:#E88B8B}
+.nav-foot .reset-btn.danger:hover{color:#F4B4B4}
+
+/* 主区 */
+.main{flex:1;min-width:0;padding:26px 30px 48px}
+.view{display:none;max-width:1440px;margin:0 auto}
+.view.active{display:block;animation:fadeIn .22s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.view-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.view-title{font-size:21px;font-weight:700;color:var(--navy-900);letter-spacing:.3px}
+.view-sub{font-size:12.5px;color:var(--ink2);margin-top:5px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.view-sub .sep{color:var(--line);}
+.view-sub .today-strong{color:var(--blue);font-weight:600}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+
+/* 按钮 */
+.btn{
+  display:inline-flex;align-items:center;gap:6px;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:500;
+  border:1px solid var(--line);background:var(--card);color:var(--ink);transition:all .14s;white-space:nowrap;
+}
+.btn svg{width:15px;height:15px}
+.btn:hover{border-color:#C6D4E4;background:#F7FAFD}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 3px 8px rgba(20,97,179,.25)}
+.btn.primary:hover{background:#10509A;box-shadow:0 4px 12px rgba(20,97,179,.32)}
+.btn.ghost{background:transparent;border-color:transparent;color:var(--ink2)}
+.btn.ghost:hover{background:#E9EFF6;color:var(--ink)}
+.btn.danger{background:var(--red);border-color:var(--red);color:#fff}
+.btn.danger:hover{background:#B93B37}
+.btn.sm{padding:5px 10px;font-size:12px;border-radius:7px}
+.btn.sm svg{width:13px;height:13px}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+
+/* 统计卡 */
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.stat-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px;display:flex;align-items:center;gap:14px;transition:transform .16s ease, box-shadow .16s ease}
+.stat-card.tf-card{cursor:pointer;position:relative}
+.stat-card.tf-card.active{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue) inset, 0 8px 20px rgba(15,42,84,.12)}
+.stat-card.tf-card.active::after{content:"";position:absolute;left:18px;right:18px;bottom:0;height:3px;border-radius:3px 3px 0 0;background:var(--blue)}
+@media (hover:hover){ .stat-card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(15,42,84,.10)} }
+.stat-ico{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex:0 0 42px}
+.stat-ico svg{width:21px;height:21px}
+.stat-ico.blue{background:var(--blue-bg);color:var(--blue)}
+.stat-ico.orange{background:var(--orange-bg);color:var(--orange)}
+.stat-ico.green{background:var(--green-bg);color:var(--green)}
+.stat-ico.red{background:var(--red-bg);color:var(--red)}
+.stat-num{font-size:27px;font-weight:700;color:var(--navy-900);line-height:1.1;font-variant-numeric:tabular-nums}
+.stat-lbl{font-size:12px;color:var(--ink2);margin-top:3px}
+
+/* 卡片 */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.card-pad{padding:16px 18px}
+
+/* 工具栏 */
+.toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 16px;border-bottom:1px solid var(--line2)}
+.seg{display:inline-flex;background:#E9EFF6;border-radius:9px;padding:3px;gap:2px}
+.seg-btn{border:none;background:transparent;padding:6px 13px;font-size:12.5px;border-radius:7px;color:var(--ink2);font-weight:500;transition:all .14s}
+.seg-btn:hover{color:var(--ink)}
+.seg-btn.active{background:#fff;color:var(--navy-900);font-weight:600;box-shadow:0 1px 3px rgba(13,34,56,.14)}
+.ctl-group{display:flex;align-items:center;gap:7px}
+.type-filter-wrap{display:flex;align-items:center;gap:7px}
+.type-filter{min-width:108px}
+.ctl-label{font-size:12.5px;color:var(--ink2);font-weight:500}
+.ctl-input{
+  border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:12.5px;background:#fff;color:var(--ink);
+}
+.ctl-input:focus{border-color:var(--blue);outline:none;box-shadow:0 0 0 3px rgba(20,97,179,.12)}
+.ctl-range{font-size:12.5px;color:var(--blue);font-weight:600;min-width:118px;font-variant-numeric:tabular-nums}
+.ctl-arrow{display:flex;gap:4px}
+.search{display:flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:8px;background:#fff;padding:6px 10px;margin-left:auto;min-width:190px;transition:border-color .13s, box-shadow .13s}
+.search:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(20,97,179,.12)}
+.search svg{width:15px;height:15px;color:var(--ink3);flex:0 0 15px}
+.search input{border:none;outline:none;font-size:12.5px;width:100%;background:transparent}
+
+.count-line{padding:9px 16px;font-size:12.5px;color:var(--ink2);border-bottom:1px solid var(--line2);display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.empty-panel{padding:0}
+.count-line b{font-weight:600;color:var(--ink)}
+.count-line .dot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:5px;vertical-align:1px}
+/* 本月休假合计子模块 */
+.ms-card{margin-bottom:14px}
+.ms-head{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line2);flex-wrap:wrap}
+.ms-head svg{width:16px;height:16px;color:var(--blue);flex:0 0 16px}
+.ms-title{font-size:13.5px;font-weight:700;color:var(--ink)}
+.ms-sub{font-size:12px;color:var(--ink2);font-weight:400}
+.ms-table{min-width:auto}
+.ms-table th{white-space:nowrap}
+.ms-table td{padding:8px 12px}
+.ms-table .sum-total{font-weight:700;color:var(--ink)}
+.ms-table .sum-name{font-weight:600}
+.ms-empty{padding:18px 16px;font-size:13px;color:var(--ink3)}
+.mix-warn{display:inline-flex;align-items:center;gap:3px;font-size:10.5px;font-weight:600;color:#B45309;background:#FEF3C7;border:1px solid #FCD34D;border-radius:6px;padding:1px 6px;margin-left:5px;white-space:nowrap;cursor:help;vertical-align:1px}
+.ms-row-click{cursor:pointer}
+.ms-row-click.open .ms-arrow{transform:rotate(180deg)}
+.ms-row-click:hover{background:#F1F5FF!important}
+.ms-arrow{display:inline-block;margin-left:8px;font-size:11px;color:#94A3B8;vertical-align:1px;transition:transform .18s ease}
+.ms-table{width:100%;table-layout:fixed}
+.ms-table th{white-space:nowrap}
+.ms-table td.td-num.sum-total{text-align:center}
+.ms-table td:first-child{padding-left:12px}
+.ms-detail-row>td{background:#F8FAFF;border-top:1px dashed #D6E4FF;padding:10px 12px}
+.ms-detail-wrap{overflow-x:auto;border:1px solid #E3ECFF;border-radius:10px;background:#F8FAFF}
+.ms-subtable{width:100%;min-width:1000px;font-size:13px;table-layout:auto}
+.ms-subtable th{background:#EEF4FF;color:#1E3A8A;font-weight:600;padding:8px 10px;text-align:center;white-space:nowrap;border-bottom:1px solid #D9E6FF}
+.ms-subtable td{padding:8px 10px;text-align:center;border-top:1px solid #EEF3FB;color:#334155;white-space:nowrap}
+.ms-subtable tr:nth-child(even) td{background:#FAFCFF}
+.ms-subtable td .dt-cell{display:inline-block}
+.ms-detail-empty{color:#94A3B8;font-size:13px;padding:10px 4px}
+
+/* 表格 */
+.table-wrap{overflow:auto;max-height:calc(100vh - 260px)}
+table.data{width:100%;border-collapse:collapse;table-layout:fixed;min-width:860px}
+table.data th{
+  background:#F5F8FB;color:var(--ink2);font-size:12px;font-weight:600;text-align:center;padding:10px 14px;
+  border-bottom:1px solid var(--line);position:sticky;top:0;z-index:2;white-space:nowrap;
+}
+table.data td{padding:9px 14px;border-bottom:1px solid var(--line2);font-size:13px;vertical-align:middle;text-align:center}
+/* 首列固定：横向滚动时始终可见（序号/类别），手机端体验关键 */
+table.data th:first-child,table.data td:first-child{position:sticky;left:0;background:#fff;z-index:1}
+table.data th:first-child{background:#F5F8FB;z-index:3;left:0}
+table.data tbody tr{transition:background .12s}
+/* 斑马纹（长表格可读性），首列固定列同步 */
+table.data tbody tr:nth-child(even){background:#F8FAFD}
+table.data tbody tr:nth-child(even) td:first-child{background:#F8FAFD}
+table.data tbody tr:hover{background:#EFF5FC}
+table.data tbody tr:hover td:first-child{background:#EFF5FC}
+table.data tbody tr.row-over td{background:#FEF7F6}
+table.data tbody tr.row-over td:first-child{background:#FEF7F6}
+table.data tbody tr.row-over:hover td{background:#FDEFED}
+table.data tbody tr.row-over:hover td:first-child{background:#FDEFED}
+table.data tbody tr:last-child td{border-bottom:none}
+/* 月合计表覆盖 .data 的 min-width 与首列 sticky（手机端需占满全宽、不横向溢出） */
+table.data.ms-table{width:100%;min-width:0;table-layout:fixed}
+table.data.ms-table th:first-child,table.data.ms-table td:first-child{position:static;left:auto;background:inherit;z-index:auto}
+table.data.ms-table th{background:#F5F8FB}
+table.data.ms-table tbody tr:nth-child(even) td:first-child{background:#F8FAFD}
+table.data.ms-table tbody tr:hover td:first-child{background:#EFF5FC}
+.td-name{font-weight:600;color:var(--ink)}
+.td-sub{color:var(--ink3);font-size:11.5px;margin-top:1px}
+.td-num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.dt-cell{line-height:1.4}
+.dt-cell .d{font-size:12.5px;color:var(--ink);font-variant-numeric:tabular-nums}
+.dt-cell .t{font-size:11.5px;color:var(--ink3);font-variant-numeric:tabular-nums}
+.dt-cell .t b{color:var(--ink2);font-weight:500}
+
+/* 序号 & 类别 */
+.sn-chip{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;border-radius:20px;padding:2.5px 9px;white-space:nowrap}
+.sn-chip.f{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-line)}
+.sn-chip.z{background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange-line)}
+.sn-num{font-weight:600;font-variant-numeric:tabular-nums}
+.sn-num.f{color:var(--blue)} .sn-num.z{color:var(--orange)}
+.sn-empty{color:var(--ink3)}
+.tel-link{color:var(--blue);text-decoration:none;font-variant-numeric:tabular-nums}
+.tel-link:hover{text-decoration:underline}
+.type-badge{display:inline-flex;align-items:center;padding:1px 7px;border-radius:99px;font-size:11px;font-weight:600;white-space:nowrap;line-height:1.5;margin:1px 2px 1px 0}
+#summaryTable th{white-space:nowrap}
+#summaryTable td{padding:8px 12px}
+#summaryTable .sum-total{font-weight:700;color:var(--ink)}
+#summaryTable .sum-name{font-weight:600}
+.td-types{display:flex;flex-wrap:wrap;gap:3px;align-items:center;line-height:1.55;max-width:220px}
+.type-sum-card{padding:14px 16px;margin-bottom:14px}
+.ts-head{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.ts-title{font-size:14px;font-weight:600;color:var(--navy-900)}
+.ts-sub{font-size:11.5px;color:var(--ink3)}
+.ts-body{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.ts-total{margin-left:auto;font-size:12.5px;color:var(--ink2)}
+.ts-total b{font-size:17px;color:var(--navy-900)}
+.cat-chip{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;border-radius:6px;padding:3px 8px;white-space:nowrap}
+.cat-chip.f{background:var(--blue-bg);color:var(--blue)}
+.cat-chip.z{background:var(--orange-bg);color:var(--orange)}
+.cat-chip svg{width:12px;height:12px}
+
+/* 状态徽章 */
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;border-radius:20px;padding:2.5px 9px;white-space:nowrap}
+.badge .dot{width:6px;height:6px;border-radius:50%}
+.badge.leave{background:var(--blue-bg);color:var(--blue)}
+.badge.leave .dot{background:var(--blue)}
+.badge.back{background:var(--green-bg);color:var(--green)}
+.badge.back .dot{background:var(--green)}
+.badge.over{background:var(--red-bg);color:var(--red)}
+.badge.over .dot{background:var(--red)}
+.row-over td{background:#FEF7F6}
+.row-click{cursor:pointer}
+
+/* 空态 */
+.empty{padding:56px 20px;text-align:center;color:var(--ink3)}
+.empty svg{width:40px;height:40px;margin:0 auto 12px;opacity:.5;display:block}
+.empty .t{font-size:14px;color:var(--ink2);font-weight:500}
+.empty .s{font-size:12.5px;margin-top:6px}
+
+/* 月度图 */
+.chart-card{padding:16px 18px 14px;margin-bottom:18px}
+.chart-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+.chart-title{font-size:14px;font-weight:600;color:var(--navy-900)}
+.chart-sub{font-size:11.5px;color:var(--ink3)}
+.legend{display:flex;gap:14px;margin-left:auto;font-size:11.5px;color:var(--ink2)}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:-1px}
+.chart{display:flex;align-items:flex-end;gap:7px;height:128px;padding:4px 2px 0}
+.bar-col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:1px;height:100%;min-width:0}
+.bar-col .bar-f{background:linear-gradient(180deg,#4D8FDD,#1461B3);border-radius:4px 4px 0 0}
+.bar-col .bar-z{background:linear-gradient(180deg,#F7A23B,#C2410C);border-radius:0}
+.bar-col .bar-seg{width:100%;transition:height .4s ease}
+.bar-col:hover .bar-seg{opacity:.85}
+.bar-col .val{font-size:10.5px;color:var(--ink2);text-align:center;font-variant-numeric:tabular-nums;height:15px;line-height:15px;overflow:visible;white-space:nowrap}
+.bar-col .lbl{font-size:10.5px;color:var(--ink3);text-align:center;padding-top:5px;border-top:1px solid var(--line);margin-top:2px}
+.bar-col.zero .lbl{opacity:.5;border-top-color:var(--line)}
+.bar-col .bar-zero{width:60%;max-width:18px;height:3px;margin:0 auto;border-radius:3px;background:var(--line);opacity:.55}
+.rec-flag{font-size:9.5px;border-radius:3px;padding:0 4px;margin-left:3px;font-weight:600;vertical-align:1px;white-space:nowrap}
+.rec-flag.cross{background:#FBEED7;color:#B45309;border:1px solid #F2D9B8}
+.rec-flag.week{background:#E0F2F1;color:#0E7490;border:1px solid #B2DFDB}
+.rec-flag.mixed{background:#F1E8FD;color:#6D28D9;border:1px solid #DCC9F6}
+.rec-flag.mismatch{background:#FEE2E2;color:#B91C1C;border:1px solid #FECACA}
+.chart-note{font-size:11px;color:var(--ink3);margin-top:8px;text-align:right}
+
+/* ============ 弹窗 ============ */
+.overlay{
+  position:fixed;inset:0;background:rgba(11,31,54,.46);display:none;align-items:center;justify-content:center;
+  z-index:100;padding:20px;backdrop-filter:blur(2px);
+}
+.overlay.show{display:flex;animation:fadeIn .18s ease}
+.modal{
+  background:#fff;border-radius:14px;width:520px;max-width:100%;max-height:calc(100vh - 48px);display:flex;flex-direction:column;
+  box-shadow:0 18px 50px rgba(11,31,54,.28);animation:pop .2s cubic-bezier(.2,.9,.3,1.2);
+}
+@keyframes pop{from{opacity:0;transform:scale(.96) translateY(8px)}to{opacity:1;transform:none}}
+.modal.wide{width:680px}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 13px;border-bottom:1px solid var(--line2)}
+.modal-title{font-size:15.5px;font-weight:700;color:var(--navy-900);display:flex;align-items:center;gap:8px}
+.modal-title svg{width:17px;height:17px;color:var(--blue)}
+.modal-close{border:none;background:none;color:var(--ink3);padding:4px;border-radius:6px;display:flex}
+.modal-close:hover{background:#EEF2F7;color:var(--ink)}
+.modal-body{padding:18px 20px;overflow:auto}
+.modal-foot{display:flex;justify-content:flex-end;gap:9px;padding:13px 20px 16px;border-top:1px solid var(--line2)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px 14px}
+.field{display:flex;flex-direction:column;gap:5px}
+.field.full{grid-column:1/-1}
+.field label{font-size:12px;font-weight:600;color:var(--ink2)}
+.field label .req{color:var(--red)}
+.field input,.field select,.field textarea{
+  border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;background:#fff;
+  transition:border .14s,box-shadow .14s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue);outline:none;box-shadow:0 0 0 3px rgba(20,97,179,.12)}
+.field textarea{resize:vertical;min-height:56px}
+.hint{font-size:11.5px;color:var(--ink3);line-height:1.5}
+.hint.warn{color:var(--orange)}
+.form-hints{margin-top:2px}
+.form-hints>summary{font-size:12px;color:var(--blue);cursor:pointer;user-select:none;padding:4px 0;list-style:none;display:flex;align-items:center;gap:5px}
+.form-hints>summary::-webkit-details-marker{display:none}
+.form-hints>summary::before{content:"▸";font-size:10px;transition:transform .15s;display:inline-block}
+.form-hints[open]>summary::before{transform:rotate(90deg)}
+.form-hints .hint{margin-top:7px}
+.field-status{display:flex;gap:7px;flex-wrap:wrap}
+.status-opt{
+  flex:1;min-width:90px;border:1px solid var(--line);border-radius:8px;background:#fff;padding:8px 6px;text-align:center;
+  font-size:12.5px;color:var(--ink2);font-weight:500;transition:all .13s;
+}
+.status-opt:hover{border-color:#C6D4E4}
+.status-opt.sel-auto{border-color:var(--blue);background:var(--blue-bg);color:var(--blue);font-weight:600}
+.status-opt.sel-leave{border-color:var(--blue);background:var(--blue-bg);color:var(--blue);font-weight:600}
+.status-opt.sel-back{border-color:var(--green);background:var(--green-bg);color:var(--green);font-weight:600}
+.status-opt.sel-over{border-color:var(--red);background:var(--red-bg);color:var(--red);font-weight:600}
+.sn-input-wrap{display:flex;gap:7px;align-items:center}
+.sn-input-wrap .next-hint{font-size:11.5px;color:var(--ink3)}
+
+/* 导入区 */
+.import-zone{
+  border:1.5px dashed #C6D4E4;border-radius:12px;padding:26px 18px;text-align:center;background:#F9FBFD;transition:all .15s;
+}
+.import-zone.drag{border-color:var(--blue);background:var(--blue-bg)}
+.import-zone svg{width:30px;height:30px;color:var(--blue);margin:0 auto 8px;display:block}
+.import-zone .t{font-size:13.5px;font-weight:600;color:var(--ink)}
+.import-zone .s{font-size:12px;color:var(--ink3);margin-top:4px}
+.import-zone .s b{color:var(--blue);cursor:pointer;font-weight:600}
+.tpl-table{width:100%;border-collapse:collapse;font-size:11.5px;margin-top:12px}
+.tpl-table th{background:#F5F8FB;color:var(--ink2);font-weight:600;padding:6px 8px;border:1px solid var(--line);text-align:center;white-space:nowrap}
+.tpl-table td{padding:6px 8px;border:1px solid var(--line);color:var(--ink);font-variant-numeric:tabular-nums;text-align:center}
+.tpl-table .demo{color:var(--ink3)}
+.import-result{margin-top:14px;background:var(--green-bg);border:1px solid var(--green-line);color:var(--green);border-radius:9px;padding:10px 13px;font-size:12.5px;font-weight:500}
+.import-result.err{background:var(--red-bg);border-color:var(--red-line);color:var(--red)}
+
+/* 数据备份 */
+.backup-banner{
+  display:flex;align-items:center;gap:10px;background:var(--orange-bg);border:1px solid var(--orange-line);color:#8A4B0F;
+  border-radius:10px;padding:10px 14px;margin-bottom:18px;font-size:13px;
+}
+.backup-banner svg{width:17px;height:17px;color:var(--orange);flex:0 0 17px}
+.backup-banner .msg{flex:1;min-width:0;line-height:1.45}
+.backup-banner .btn{margin-left:auto}
+.banner-close{border:none;background:none;color:var(--orange);padding:4px;display:flex;border-radius:6px;flex:0 0 auto}
+.banner-close:hover{background:rgba(217,122,27,.15)}
+.backup-meta{font-size:12.5px;color:var(--ink2);background:var(--blue-bg);border:1px solid var(--blue-line);border-radius:9px;padding:10px 13px;margin-bottom:8px;line-height:1.6}
+.backup-meta b{color:var(--blue)}
+.backup-row{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--line2);flex-wrap:wrap}
+.backup-row:last-of-type{border-bottom:none}
+.backup-row .info{flex:1;min-width:170px}
+.backup-row .t{font-size:13.5px;font-weight:600;color:var(--ink)}
+.backup-row .s{font-size:12px;color:var(--ink3);margin-top:3px;line-height:1.5}
+.backup-row .s b{color:var(--blue)}
+@media (max-width:560px){ .backup-row .btn{width:100%;justify-content:center} .backup-banner{flex-wrap:wrap} .backup-banner .btn{width:100%;justify-content:center;margin-left:0} }
+
+/* Toast */
+.toast{
+  position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(16px);background:var(--navy-900);color:#E8EFF6;
+  padding:10px 18px;border-radius:10px;font-size:13px;opacity:0;pointer-events:none;transition:all .22s;z-index:200;
+  box-shadow:0 8px 24px rgba(11,31,54,.35);display:flex;align-items:center;gap:8px;max-width:80vw;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast svg{width:15px;height:15px;color:#F59E2E;flex:0 0 15px}
+.toast.ok svg{color:#5FD3A0}
+
+/* 移动端顶栏 */
+.topbar{display:none;position:sticky;top:0;z-index:60;background:var(--navy-900);padding:10px 14px;align-items:center;gap:10px}
+.topbar .brand-logo{width:32px;height:32px;flex-basis:32px;border-radius:8px}
+.topbar .brand-name{font-size:14px}
+.top-tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:8px 14px 0;background:var(--navy-900)}
+.top-tabs::-webkit-scrollbar{display:none}
+.top-tab{flex:0 0 auto;border:none;background:transparent;color:#9DB1C6;font-size:12.5px;padding:7px 13px;border-radius:8px 8px 0 0;font-weight:500;display:flex;align-items:center;gap:6px}
+.top-tab svg{width:14px;height:14px}
+.top-tab.active{background:var(--bg);color:var(--navy-900);font-weight:600}
+.top-btn{
+  border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);color:#DCE6F0;
+  font-size:12px;font-weight:500;border-radius:8px;padding:6px 11px;display:inline-flex;align-items:center;gap:5px;white-space:nowrap;
+}
+.top-btn:hover{background:rgba(255,255,255,.16);color:#fff}
+.top-btn svg{width:13px;height:13px}
+
+@media (max-width:1100px){
+  .app{flex-direction:column}
+  .sidebar{display:none}
+  .topbar{display:flex}
+  .top-tabs{display:flex}
+  .main{padding:18px 14px 40px}
+  .stat-grid{grid-template-columns:repeat(2,1fr)}
+  .search{margin-left:0;min-width:0;flex:1}
+  .toolbar{gap:9px}
+}
+@media (max-width:640px){
+  .ctl-input,.search input,.field input,.field select,.field textarea{font-size:16px}
+}
+@media (max-width:640px){
+  #f_status{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .modal{max-height:calc(100vh - 24px);border-radius:12px}
+  .modal-body{padding:14px 16px}
+  .modal-head{padding:13px 16px 10px}
+  .modal-foot{padding:10px 16px 13px}
+  .form-grid{gap:8px 12px}
+  .field{gap:3px}
+  .field label{font-size:12.5px}
+  .field input,.field select,.field textarea{padding:8px 10px}
+  .status-opt{padding:7px 4px;font-size:12.5px}
+  #f_status{gap:7px}
+  .hint{font-size:11px;line-height:1.45}
+  .topbar .btn,.top-tabs .seg-btn,.toolbar .btn,.actions .btn,.backup-row .btn,.backup-banner .btn,.edit-foot .btn,.seg-btn,.btn{min-height:44px}
+  .seg-btn{padding:8px 14px;font-size:14px}
+  .ctl-label,.ctl-input,.ctl-range,.search input,.count-line{font-size:14px}
+  .ctl-input{padding:9px 11px}
+  .view-sub{font-size:13.5px}
+  .stat-lbl{font-size:13px}
+  table.data td{padding:10px 12px;font-size:14px}
+  .dt-cell .d{font-size:13.5px}
+  .dt-cell .t{font-size:12.5px}
+  .td-sub{font-size:12px}
+  .mix-warn{font-size:11.5px;padding:2px 7px}
+  .ms-detail-row>td{padding:12px}
+  .ms-subtable{font-size:14px;min-width:1000px}
+  .ms-subtable th,.ms-subtable td{padding:9px 10px}
+  .ms-arrow{font-size:13px}
+  .ms-title{font-size:14.5px}
+  .ms-sub,.ms-empty{font-size:13px}
+}
+@media (max-width:560px){
+  .stat-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .stat-card{padding:12px 13px}
+  .stat-ico{width:34px;height:34px;flex-basis:34px}
+  .stat-ico svg{width:17px;height:17px}
+  .stat-num{font-size:22px}
+  .view-title{font-size:18px}
+  .actions{width:100%}
+  .actions .btn{flex:1;justify-content:center}
+  .form-grid{grid-template-columns:1fr}
+  .chart-card{padding:14px 10px 12px}
+  .chart-head{flex-wrap:wrap;gap:5px 8px}
+  .chart-title{white-space:nowrap}
+  .chart-sub{flex-basis:100%;order:3;white-space:normal;line-height:1.45}
+  .legend{margin-left:auto}
+  .tpl-table{min-width:660px}
+  .tpl-table td{white-space:nowrap}
+  .view-sub{display:block;line-height:1.55}
+  .chart{gap:3px;height:112px}
+  .bar-col .lbl{font-size:9.5px;padding-top:4px}
+  .bar-col .val{font-size:9.5px}
+  .legend{gap:8px;font-size:10px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important}
+}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-thumb{background:#C7D3E0;border-radius:6px;border:2px solid transparent;background-clip:content-box}
+::-webkit-scrollbar-thumb:hover{background:#A9BACB;background-clip:content-box;border:2px solid transparent}
+::-webkit-scrollbar-track{background:transparent}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ===== 侧边栏 ===== -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-logo">
+        <svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+      </div>
+      <div>
+        <div class="brand-name">消防救援站</div>
+        <div class="brand-sub"><span data-year>2026</span> 年度休假统计</div>
+      </div>
+    </div>
+    <nav class="nav" id="sideNav">
+      <div class="nav-label">总览</div>
+      <button class="nav-item active" data-view="today">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 16l2 2 4-4"/></svg>
+        今日休假总览
+      </button>
+      <div class="nav-label" style="margin-top:8px">台账</div>
+      <button class="nav-item" data-view="all">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        所有人员
+      </button>
+      <button class="nav-item" data-view="national">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        国家队消防员
+      </button>
+      <button class="nav-item" data-view="fulltime">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>
+        政府专职消防员
+      </button>
+    </nav>
+    <div class="nav-foot">
+      <div class="today-line">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span id="sideDate">—</span>
+      </div>
+      <button class="reset-btn" id="backupBtn">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        数据备份
+      </button>
+      <button class="reset-btn danger" id="clearAllBtn" style="margin-top:4px">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        清空休假数据
+      </button>
+    </div>
+  </aside>
+
+  <!-- ===== 移动端顶栏 ===== -->
+  <div class="topbar" style="flex-direction:column;align-items:stretch;padding:0">
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 14px">
+      <div class="brand-logo">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+      </div>
+      <div><div class="brand-name" style="font-size:14px">消防救援站</div><div class="brand-sub" style="font-size:10.5px"><span data-year>2026</span> 年度休假统计</div></div>
+      <div style="margin-left:auto;display:flex;gap:6px">
+        <button class="top-btn" id="topBackupBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>备份</button>
+      </div>
+    </div>
+    <div class="top-tabs" id="topTabs">
+      <button class="top-tab active" data-view="today"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>今日总览</button>
+      <button class="top-tab" data-view="all"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>所有人员</button>
+      <button class="top-tab" data-view="national"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>国家队</button>
+      <button class="top-tab" data-view="fulltime"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>政府专职</button>
+    </div>
+  </div>
+
+  <!-- ===== 主区 ===== -->
+  <main class="main">
+    <div class="backup-banner" id="backupBanner" style="display:none">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+      <span class="msg" id="bannerMsg">距上次数据备份已超过 7 天，点击立即备份（备份文件自动覆盖旧文件，仅保留最近一份）</span>
+      <button class="btn sm primary" id="bannerBackupBtn">立即备份</button>
+      <button class="banner-close" id="bannerCloseBtn" title="稍后提醒"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+
+    <!-- 今日休假总览 -->
+    <section class="view active" id="view-today">
+      <div class="view-head">
+        <div>
+          <div class="view-title">今日休假总览</div>
+          <div class="view-sub">
+            <span>截止</span><span class="today-strong" id="todayStrong">—</span><span>08:00 统计 · 点击统计卡查看对应人员</span>
+            <span class="sep">|</span>
+            <span>序号按离队时间自动排序，两队伍各自独立编号</span>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn" id="todayExportBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出</button>
+          
+          <button class="btn primary" data-add="today"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>新增记录</button>
+        </div>
+      </div>
+      <div class="stat-grid" id="todayStats"></div>
+      <div class="card">
+        <div class="table-wrap">
+          <table class="data" style="min-width:1000px">
+            <colgroup>
+              <col style="width:110px"><col style="width:88px"><col style="width:100px"><col style="width:126px">
+              <col style="width:120px"><col style="width:120px"><col style="width:84px"><col style="width:auto"><col style="width:92px">
+            </colgroup>
+            <thead><tr>
+              <th>序号（队伍）</th><th>姓名</th><th>衔级</th><th>电话</th><th>离队时间</th><th>归队时间</th><th>请假类型</th><th>假条备注</th><th>状态</th>
+            </tr></thead>
+            <tbody id="todayBody"></tbody>
+          </table>
+        </div>
+        <div class="empty-panel" data-empty="today" style="display:none"></div>
+      </div>
+    </section>
+
+    <!-- 所有人员 -->
+    <section class="view" id="view-all">
+      <div class="view-head">
+        <div>
+          <div class="view-title">所有人员</div>
+          <div class="view-sub"><span data-year>2026</span> 年以来全部人员休假记录台账</div>
+        </div>
+        <div class="actions">
+          <button class="btn" data-import="all"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>导入</button>
+          <button class="btn" data-export="all"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出</button>
+          
+          <button class="btn primary" data-add="all"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>新增记录</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="toolbar" data-toolbar="all">
+          <div class="seg" data-seg="all">
+            <button class="seg-btn active" data-mode="all">全部</button>
+            <button class="seg-btn" data-mode="day">按日查询</button>
+            <button class="seg-btn" data-mode="week">按周查询</button>
+            <button class="seg-btn" data-mode="month">按月查询</button>
+          </div>
+          <div class="ctl-group" data-ctl="day" style="display:none">
+            <label class="ctl-label">日期</label>
+            <input type="date" class="ctl-input" data-input="day">
+          </div>
+          <div class="ctl-group" data-ctl="week" style="display:none">
+            <label class="ctl-label">周</label>
+            <div class="ctl-arrow">
+              <button class="btn sm ghost" data-week="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+            </div>
+            <input type="date" class="ctl-input" data-input="week">
+            <span class="ctl-range" data-range="week">—</span>
+            <div class="ctl-arrow">
+              <button class="btn sm ghost" data-week="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+            </div>
+          </div>
+          <div class="ctl-group" data-ctl="month" style="display:none">
+            <label class="ctl-label">月份</label>
+            <div class="ctl-arrow">
+              <button class="btn sm ghost" data-month="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+            </div>
+            <input type="month" class="ctl-input" data-input="month">
+            <span class="ctl-range" data-range="month">—</span>
+            <div class="ctl-arrow">
+              <button class="btn sm ghost" data-month="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+            </div>
+          </div>
+          <div class="type-filter-wrap">
+            <label class="ctl-label">类型</label>
+            <select class="ctl-input type-filter" data-typefilter="all"><option value="">全部类型</option></select>
+          </div>
+          <div class="search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" placeholder="按姓名搜索" data-search="all">
+          </div>
+        </div>
+        <div class="count-line" data-count="all"></div>
+        <div class="card type-sum-card" id="typeSummary" style="display:none"></div>
+        <div class="card ms-card" data-msummary="all" style="display:none">
+          <div class="ms-head">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+            <span class="ms-title">本月休假合计</span>
+            <span class="ms-sub" data-msub="all"></span>
+          </div>
+          <div class="table-wrap" style="max-height:none">
+            <table class="data ms-table">
+              <thead id="msHead-all"></thead>
+              <tbody id="msBody-all"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="data" style="min-width:1000px">
+            <colgroup>
+              <col style="width:108px"><col style="width:88px"><col style="width:100px"><col style="width:126px">
+              <col style="width:120px"><col style="width:120px"><col style="width:84px"><col style="width:auto"><col style="width:92px">
+            </colgroup>
+            <thead><tr>
+              <th>类别</th><th>姓名</th><th>衔级</th><th>电话</th><th>离队时间</th><th>归队时间</th><th>请假类型</th><th>假条备注</th><th>状态</th>
+            </tr></thead>
+            <tbody data-tbody="all"></tbody>
+          </table>
+        </div>
+        <div class="empty-panel" data-empty="all" style="display:none"></div>
+      </div>
+      <div class="chart-card card" style="margin-top:18px">
+        <div class="chart-head">
+          <div class="chart-title" id="chartTitle">月度休假记录分布</div>
+          <div class="chart-sub" id="chartSub">按离队月份统计各队伍请假记录条数</div>
+          <div class="legend">
+            <span><i style="background:var(--blue)"></i>国家队消防员</span>
+            <span><i style="background:var(--orange)"></i>政府专职消防员</span>
+          </div>
+        </div>
+        <div class="chart" id="monthChart"></div>
+        <div class="chart-note" id="chartNote"></div>
+      </div>
+    </section>
+
+    <!-- 国家队消防员 -->
+    <section class="view" id="view-national">
+      <div class="view-head">
+        <div>
+          <div class="view-title">国家队消防员</div>
+          <div class="view-sub"><span data-year>2026</span> 年以来除政府专职人员以外的休假记录 · 序号按离队时间自动排序、队伍内独立编号</div>
+        </div>
+        <div class="actions">
+          <button class="btn" data-import="national"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>导入</button>
+          <button class="btn" data-export="national"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出</button>
+          
+          <button class="btn primary" data-add="national"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>新增记录</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="toolbar" data-toolbar="national">
+          <div class="seg" data-seg="national">
+            <button class="seg-btn active" data-mode="all">全部</button>
+            <button class="seg-btn" data-mode="day">按日查询</button>
+            <button class="seg-btn" data-mode="week">按周查询</button>
+            <button class="seg-btn" data-mode="month">按月查询</button>
+          </div>
+          <div class="ctl-group" data-ctl="day" style="display:none">
+            <label class="ctl-label">日期</label>
+            <input type="date" class="ctl-input" data-input="day">
+          </div>
+          <div class="ctl-group" data-ctl="week" style="display:none">
+            <label class="ctl-label">周</label>
+            <div class="ctl-arrow">
+              <button class="btn sm ghost" data-week="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+            </div>
+            <input type="date" class="ctl-input" data-input="week">
+            <span class="ctl-range" data-range="week">—</span>
+            <div class="ctl-arrow">
+              <button class="btn sm ghost" data-week="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+            </div>
+          </div>
+          <div class="ctl-group" data-ctl="month" style="display:none">
+            <label class="ctl-label">月份</label>
+            <div class="ctl-arrow">
+              <button class="btn sm ghost" data-month="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+            </div>
+            <input type="month" class="ctl-input" data-input="month">
+            <span class="ctl-range" data-range="month">—</span>
+            <div class="ctl-arrow">
+              <button class="btn sm ghost" data-month="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+            </div>
+          </div>
+          <div class="type-filter-wrap">
+            <label class="ctl-label">类型</label>
+            <select class="ctl-input type-filter" data-typefilter="national"><option value="">全部类型</option></select>
+          </div>
+        </div>
+        <div class="count-line" data-count="national"></div>
+        <div class="card ms-card" data-msummary="national" style="display:none">
+          <div class="ms-head">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+            <span class="ms-title">本月休假合计</span>
+            <span class="ms-sub" data-msub="national"></span>
+          </div>
+          <div class="table-wrap" style="max-height:none">
+            <table class="data ms-table">
+              <thead id="msHead-national"></thead>
+              <tbody id="msBody-national"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="data" style="min-width:1000px">
+            <colgroup>
+              <col style="width:70px"><col style="width:88px"><col style="width:100px"><col style="width:126px">
+              <col style="width:120px"><col style="width:120px"><col style="width:84px"><col style="width:auto"><col style="width:92px">
+            </colgroup>
+            <thead><tr>
+              <th>序号</th><th>姓名</th><th>衔级</th><th>电话</th><th>离队时间</th><th>归队时间</th><th>请假类型</th><th>假条备注</th><th>状态</th>
+            </tr></thead>
+            <tbody data-tbody="national"></tbody>
+          </table>
+        </div>
+        <div class="empty-panel" data-empty="national" style="display:none"></div>
+      </div>
+    </section>
+
+    <!-- 政府专职消防员 -->
+    <section class="view" id="view-fulltime">
+      <div class="view-head">
+        <div>
+          <div class="view-title">政府专职消防员</div>
+          <div class="view-sub"><span data-year>2026</span> 年以来政府专职人员休假记录 · 序号按离队时间自动排序、队伍内独立编号</div>
+        </div>
+        <div class="actions">
+          <button class="btn" data-import="fulltime"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>导入</button>
+          <button class="btn" data-export="fulltime"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出</button>
+          
+          <button class="btn primary" data-add="fulltime"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>新增记录</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="toolbar" data-toolbar="fulltime">
+          <div class="seg" data-seg="fulltime">
+            <button class="seg-btn active" data-mode="all">全部</button>
+            <button class="seg-btn" data-mode="day">按日查询</button>
+            <button class="seg-btn" data-mode="week">按周查询</button>
+            <button class="seg-btn" data-mode="month">按月查询</button>
+          </div>
+          <div class="ctl-group" data-ctl="day" style="display:none">
+            <label class="ctl-label">日期</label>
+            <input type="date" class="ctl-input" data-input="day">
+          </div>
+          <div class="ctl-group" data-ctl="week" style="display:none">
+            <label class="ctl-label">周</label>
+            <div class="ctl-arrow">
+              <button class="btn sm ghost" data-week="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+            </div>
+            <input type="date" class="ctl-input" data-input="week">
+            <span class="ctl-range" data-range="week">—</span>
+            <div class="ctl-arrow">
+              <button class="btn sm ghost" data-week="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+            </div>
+          </div>
+          <div class="ctl-group" data-ctl="month" style="display:none">
+            <label class="ctl-label">月份</label>
+            <div class="ctl-arrow">
+              <button class="btn sm ghost" data-month="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+            </div>
+            <input type="month" class="ctl-input" data-input="month">
+            <span class="ctl-range" data-range="month">—</span>
+            <div class="ctl-arrow">
+              <button class="btn sm ghost" data-month="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+            </div>
+          </div>
+          <div class="type-filter-wrap">
+            <label class="ctl-label">类型</label>
+            <select class="ctl-input type-filter" data-typefilter="fulltime"><option value="">全部类型</option></select>
+          </div>
+        </div>
+        <div class="count-line" data-count="fulltime"></div>
+        <div class="card ms-card" data-msummary="fulltime" style="display:none">
+          <div class="ms-head">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+            <span class="ms-title">本月休假合计</span>
+            <span class="ms-sub" data-msub="fulltime"></span>
+          </div>
+          <div class="table-wrap" style="max-height:none">
+            <table class="data ms-table">
+              <thead id="msHead-fulltime"></thead>
+              <tbody id="msBody-fulltime"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="data" style="min-width:1000px">
+            <colgroup>
+              <col style="width:70px"><col style="width:88px"><col style="width:100px"><col style="width:126px">
+              <col style="width:120px"><col style="width:120px"><col style="width:84px"><col style="width:auto"><col style="width:92px">
+            </colgroup>
+            <thead><tr>
+              <th>序号</th><th>姓名</th><th>衔级</th><th>电话</th><th>离队时间</th><th>归队时间</th><th>请假类型</th><th>假条备注</th><th>状态</th>
+            </tr></thead>
+            <tbody data-tbody="fulltime"></tbody>
+          </table>
+        </div>
+        <div class="empty-panel" data-empty="fulltime" style="display:none"></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ===== 编辑 / 新增弹窗 ===== -->
+<div class="overlay" id="editOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+        <span id="editTitle">编辑记录</span>
+      </div>
+      <button class="modal-close" data-close="edit"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="field">
+          <label>姓名 <span class="req">*</span></label>
+          <input type="text" id="f_name" placeholder="人员姓名">
+        </div>
+        <div class="field">
+          <label>类别 <span class="req">*</span></label>
+          <select id="f_grp">
+            <option value="f">国家队消防员</option>
+            <option value="z">政府专职消防员</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>衔级</label>
+          <input type="text" id="f_rank" placeholder="如：四级消防士">
+        </div>
+        <div class="field">
+          <label>电话</label>
+          <input type="text" id="f_phone" placeholder="手机号 / 座机号">
+        </div>
+        <div class="field">
+          <label>离队时间 <span class="req">*</span></label>
+          <input type="datetime-local" id="f_leave">
+        </div>
+        <div class="field">
+          <label>归队时间 <span class="req">*</span></label>
+          <input type="datetime-local" id="f_ret">
+        </div>
+        <div class="field">
+          <label>请假类型 <span class="req">*</span></label>
+          <select id="f_type">
+            <optgroup label="探亲休假">
+              <option value="探望父母">探望父母</option>
+              <option value="探望配偶">探望配偶</option>
+              <option value="年假">年假</option>
+            </optgroup>
+            <optgroup label="日常休整">
+              <option value="轮休">轮休</option>
+              <option value="调休">调休</option>
+            </optgroup>
+            <optgroup label="其他类型">
+              <option value="婚假">婚假</option>
+              <option value="陪产假">陪产假</option>
+              <option value="病假">病假</option>
+              <option value="事假">事假</option>
+            </optgroup>
+            <option value="__custom__">其他（自定义命名）</option>
+          </select>
+        </div>
+        <div class="field" id="f_type_custom_wrap" style="display:none">
+          <label>其他类型名称</label>
+          <input type="text" id="f_type_custom" placeholder="如：陪产假、婚假、病假" style="min-width:0">
+        </div>
+        <div class="field">
+          <label>在位状态</label>
+          <div class="field-status" id="f_status">
+            <button type="button" class="status-opt sel-auto" data-st="auto">自动判定</button>
+            <button type="button" class="status-opt" data-st="休假">休假</button>
+            <button type="button" class="status-opt" data-st="已归队">已归队</button>
+            <button type="button" class="status-opt" data-st="逾假未归队">逾假未归队</button>
+          </div>
+        </div>
+        <div class="field full">
+          <label>类型天数拆分（可选）</label>
+          <input type="text" id="f_split" placeholder="如：9.15-9.17轮休、9.18-9.20调休">
+        </div>
+        <div class="field full">
+          <label>假条类型 / 备注</label>
+          <textarea id="f_rm" placeholder="如：2轮休、30年假（探望配偶假）等"></textarea>
+        </div>
+        <details class="field full form-hints" id="formHints">
+          <summary>填写与统计规则说明（点击展开）</summary>
+          <div class="hint warn">说明：状态为「自动判定」时，系统按归队时间自动计算休假 / 已归队；「逾假未归队」只能手动选择，系统不会自动判定。</div>
+          <div class="hint">时间规则：以每日 <b>08:00</b> 为统计点——离队时间在 08:00 及以前，当天计休假；08:00 之后离队，当天计在位（次日起休）。归队时间在 08:00 及以前，当天计在位；08:00 之后归队，当天计休假（次日 08:00 起在位）。</div>
+          <div class="hint">整天数提醒：假条离队与归队时间应保持一致（整天数），如 08:00 离队对应某日 08:00 归队。</div>
+          <div class="hint">类型拆分：一条假条含多种类型时，<b>按日期逐段精确填写</b>（月.日，段之间用顿号/逗号分隔）。例如假条 9月15日至9月20日共 6 天，前 3 天轮休、后 3 天调休，就填：<b>9.15-9.17轮休、9.18-9.20调休</b>；单天一段写「9.18调休」即可。留空则整条按请假类型统计。</div>
+        </details>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn danger" id="delBtn" style="margin-right:auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>删除</button>
+      <button class="btn" data-close="edit">取消</button>
+      <button class="btn primary" id="saveBtn">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 导入弹窗 ===== -->
+<div class="overlay" id="importOverlay">
+  <div class="modal wide">
+    <div class="modal-head">
+      <div class="modal-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        导入休假记录
+      </div>
+      <button class="modal-close" data-close="import"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="import-zone" id="importZone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <div class="t">点击选择或拖入文件</div>
+        <div class="s">支持 <b>.xlsx</b> 与 <b>.csv</b> 文件；解析 xlsx 需要联网加载组件，离线请使用 CSV</div>
+        <input type="file" id="importFile" accept=".xlsx,.csv,.json" style="display:none">
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:14px">
+        <span style="font-size:12px;font-weight:600;color:var(--ink2)">导入格式说明</span>
+        <button class="btn sm" id="tplBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>下载导入模板</button>
+      </div>
+      <div style="overflow:auto;border-radius:9px">
+        <table class="tpl-table">
+          <thead><tr><th>序号</th><th>类别</th><th>姓名</th><th>衔级</th><th>电话</th><th>离队时间</th><th>归队时间</th><th>请假类型</th><th>类型拆分</th><th>假条备注</th></tr></thead>
+          <tbody>
+            <tr><td class="demo">留空自动</td><td>国家队消防员</td><td>张三</td><td>四级消防士</td><td>13800000000</td><td><span data-year>2026</span>-09-14 08:00</td><td><span data-year>2026</span>-09-16 08:00</td><td>轮休</td><td class="demo">（可选）</td><td>2轮休</td></tr>
+            <tr><td class="demo">留空自动</td><td>政府专职消防员</td><td>李四</td><td>专职消防员</td><td>13900000000</td><td><span data-year>2026</span>-09-15 08:00</td><td><span data-year>2026</span>-09-21 08:00</td><td>轮休</td><td>9.15-9.17轮休、9.18-9.20调休</td><td>6天：前3天轮休、后3天调休</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="hint" style="margin-top:10px">规则：导入为<b>追加模式</b>（不清空现有数据，可多次导入）；类别可填「国家队消防员 / 政府专职消防员」，留空时按当前板块或衔级推断；请假类型可填 轮休 / 年假 / 调休 / 事假 / 其他（也可自定义名称，如 陪产假），留空时从假条备注自动推断；「类型拆分」用于一条假条内混合多种类型（如 轮休3、调休3，合计须等于假条天数），留空则整条按请假类型统计；离队、归队时间请填「YYYY-MM-DD HH:MM」格式，只填日期默认按 18:00 处理；姓名、离队、归队为必填，缺失的行将被跳过；本系统导出的 CSV 可直接再次导入。</div>
+      <div class="import-result" id="importResult" style="display:none"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close="import">关闭</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 确认弹窗 ===== -->
+<div class="overlay" id="confirmOverlay">
+  <div class="modal" style="width:400px">
+    <div class="modal-head">
+      <div class="modal-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <span id="confirmTitle">确认操作</span>
+      </div>
+      <button class="modal-close" data-close="confirm"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div style="font-size:13.5px;color:var(--ink);line-height:1.7" id="confirmMsg">确定执行该操作吗？</div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" id="confirmCancelBtn" data-close="confirm">取消</button>
+      <button class="btn danger" id="confirmOkBtn">确定</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 数据备份与恢复弹窗 ===== -->
+<div class="overlay" id="backupOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        数据备份与恢复
+      </div>
+      <button class="modal-close" data-close="backup"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="backup-meta" id="backupMeta"></div>
+      <div class="backup-row">
+        <div class="info">
+          <div class="t">立即备份（手机 / 电脑通用）</div>
+          <div class="s">下载备份文件，文件名固定，保存时自动覆盖旧文件，仅保留最近一份。手机若弹出文件预览，请用浏览器菜单选择「下载 / 保存」，再次备份会覆盖同一文件</div>
+        </div>
+        <button class="btn primary" id="backupNowBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>下载备份文件</button>
+      </div>
+      <div class="backup-row">
+        <div class="info">
+          <div class="t">备份到指定文件夹（电脑 Chrome / Edge）</div>
+          <div class="s">选择一次后自动记住，每 7 天打开页面自动写入，无需再选择；当前文件夹：<b id="backupDirName">未设置</b></div>
+          <div class="s" id="backupDirTip" style="margin-top:3px;color:var(--ink3)"></div>
+        </div>
+        <button class="btn" id="backupDirBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg><span id="backupDirBtnText">选择备份文件夹</span></button>
+      </div>
+      <div class="backup-row">
+        <div class="info">
+          <div class="t">从备份恢复</div>
+          <div class="s">选择 .json 备份文件恢复，将覆盖当前全部数据（操作前建议先备份）</div>
+        </div>
+        <button class="btn" id="backupRestoreBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>从备份恢复</button>
+      </div>
+      <div class="backup-row">
+        <div class="info">
+          <div class="t" style="color:var(--red)">清空休假数据（危险操作）</div>
+          <div class="s">清空后页面无任何人员数据，只能通过备份文件恢复，操作前请先备份</div>
+        </div>
+        <button class="btn danger" id="clearAllBtn2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>清空数据</button>
+      </div>
+      <div class="hint" style="margin-top:6px">自动备份：每 7 天打开页面时自动提醒 / 写入一次；备份文件仅保留最近一份，需要回退时导入该备份即可。</div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close="backup">关闭</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="toast" id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span id="toastMsg"></span></div>
+
+
+<script>
+'use strict';
+/* ============ 初始数据（由 Excel 2026请假.xlsx 提取，可在弹窗中编辑） ============ */
+const SEED_DATA = [];
+/* ============ 基础工具 ============ */
+const pad = n => String(n).padStart(2, '0');
+const dateKey = d => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+const addDays = (ds, n) => { const p = ds.split('-').map(Number); return dateKey(new Date(p[0], p[1] - 1, p[2] + n)); };
+const addMonths = (ms, n) => { const p = ms.split('-').map(Number); const dt = new Date(p[0], p[1] - 1 + n, 1); return dt.getFullYear() + '-' + pad(dt.getMonth() + 1); };
+const isAm = t => parseInt(t.slice(0, 2), 10) < 12;
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const GROUP = { f: { label: '国家队消防员', short: '国家队' }, z: { label: '政府专职消防员', short: '专职' } };
+const WEEKDAYS = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+
+/* ============ 备份相关常量 ============ */
+const BK_NAME = 'fjx_leave_backup.json';
+const BK_IDB = 'fjx_leave_idb';
+const BK_STORE = 'kv';
+const BK_KEY = 'fjx_backup_date';
+let backupDirHandle = null;
+
+const now = new Date();
+const YEAR = now.getFullYear();
+const TODAY = dateKey(now);
+const TODAY_FMT = now.getFullYear() + '年' + (now.getMonth() + 1) + '月' + now.getDate() + '日 ' + WEEKDAYS[now.getDay()];
+
+/* ============ 在位判定（每日 08:00 为统计点） ============
+   离队 ≤ 08:00 → 当日起休；离队 > 08:00 → 当日在位（次日 08:00 起休）
+   归队 ≤ 08:00 → 当日在位；归队 > 08:00 → 当日在休（次日 08:00 起在位）
+*/
+const isBefore8 = t => t <= '08:00';
+function onLeave(rec, D) {
+  const started = (rec.ld < D) || (rec.ld === D && isBefore8(rec.lt));
+  const notEnded = (rec.rd > D) || (rec.rd === D && !isBefore8(rec.rt));
+  return started && notEnded;
+}
+function overlapsPeriod(rec, s, e) {
+  let d = s;
+  while (d <= e) { if (onLeave(rec, d)) return true; d = addDays(d, 1); }
+  return false;
+}
+function effStatus(rec) {
+  if (rec.st === '休假' || rec.st === '已归队' || rec.st === '逾假未归队') return rec.st;
+  return onLeave(rec, TODAY) ? '休假' : '已归队';
+}
+/* 按查询周期判定状态（手动状态优先）：某日/某周/某月视图按统计日期判定，而非今天 */
+function effStatusIn(rec, st) {
+  if (rec.st === '休假' || rec.st === '已归队' || rec.st === '逾假未归队') return rec.st;
+  if (st.mode === 'day') return onLeave(rec, st.day) ? '休假' : '已归队';
+  if (st.mode === 'week') { const w = weekRange(st.week); return overlapsPeriod(rec, w[0], w[1]) ? '休假' : '已归队'; }
+  if (st.mode === 'month') {
+    const p = st.month.split('-').map(Number);
+    const s = st.month + '-01', e = dateKey(new Date(p[0], p[1], 0));
+    return overlapsPeriod(rec, s, e) ? '休假' : '已归队';
+  }
+  return onLeave(rec, TODAY) ? '休假' : '已归队';
+}
+function mondayOf(ds) {
+  const p = ds.split('-').map(Number);
+  const dt = new Date(p[0], p[1] - 1, p[2]);
+  dt.setDate(dt.getDate() - ((dt.getDay() + 6) % 7));
+  return dateKey(dt);
+}
+function weekRange(ds) { const s = mondayOf(ds); return [s, addDays(s, 6)]; }
+function fmtShort(ds) { return parseInt(ds.slice(5, 7), 10) + '.' + parseInt(ds.slice(8), 10); }
+
+/* ============ 数据持久化 ============ */
+const KEY = 'fjx_leave_2026_v2';
+function loadData() {
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (raw !== null) { const d = JSON.parse(raw); if (Array.isArray(d)) {
+      return d.map((r, i) => ({ ...r, id: r.id != null ? r.id : i }));
+    } }
+  } catch (e) { /* ignore */ }
+  return JSON.parse(JSON.stringify(SEED_DATA)).map((r, i) => ({ ...r, id: i }));
+}
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify(DATA)); }
+  catch (e) { toast('数据未能写入浏览器存储，刷新后修改将丢失'); }
+}
+let DATA = loadData();
+let _idSeq = DATA.reduce((m, r) => Math.max(m, r.id), 0) + 1;
+const nextId = () => _idSeq++;
+function seqMap() {
+  const m = {};
+  ['f', 'z'].forEach(g => {
+    DATA.filter(r => r.g === g).sort(byLeave).forEach((r, i) => { m[r.id] = i + 1; });
+  });
+  return m;
+}
+
+/* ============ 状态 ============ */
+let currentView = 'today';
+const state = {
+  all: { mode: 'all', day: TODAY, week: TODAY, month: TODAY.slice(0, 7), search: '', typeFilter: '' },
+  national: { mode: 'all', day: TODAY, week: TODAY, month: TODAY.slice(0, 7), search: '', typeFilter: '' },
+  fulltime: { mode: 'all', day: TODAY, week: TODAY, month: TODAY.slice(0, 7), search: '', typeFilter: '' }
+};
+
+/* ============ 视图切换 ============ */
+function switchView(v) {
+  currentView = v;
+  document.querySelectorAll('.nav-item,.top-tab').forEach(b => b.classList.toggle('active', b.dataset.view === v));
+  document.querySelectorAll('.view').forEach(s => s.classList.toggle('active', s.id === 'view-' + v));
+  if (v === 'today') renderToday(); else { syncControls(v); renderList(v); }
+}
+
+/* ============ 筛选 ============ */
+const byLeave = (a, b) => a.ld === b.ld ? (a.lt === b.lt ? a.id - b.id : (a.lt < b.lt ? -1 : 1)) : (a.ld < b.ld ? -1 : 1);
+/* 倒序：离队时间新的在前（列表/文件统一展示顺序） */
+const byLeaveDesc = (a, b) => -byLeave(a, b);
+/* 搜索防抖计时器（按视图独立，避免打字时频繁重建表格） */
+const searchTimers = {};
+function filterRecords(view) {
+  const st = state[view];
+  let rows = view === 'all' ? DATA.slice() : DATA.filter(r => r.g === (view === 'national' ? 'f' : 'z'));
+  const kw = st.search.trim();
+  if (kw) rows = rows.filter(r => r.n.includes(kw) || String(r.ph ?? '').includes(kw));
+  if (st.typeFilter) rows = rows.filter(r => recordHasType(r, st.typeFilter));
+  if (st.mode === 'day') rows = rows.filter(r => onLeave(r, st.day));
+  else if (st.mode === 'week') { const w = weekRange(st.week); rows = rows.filter(r => overlapsPeriod(r, w[0], w[1])); }
+  else if (st.mode === 'month') {
+    const p = st.month.split('-').map(Number);
+    const s = st.month + '-01', e = dateKey(new Date(p[0], p[1], 0));
+    rows = rows.filter(r => overlapsPeriod(r, s, e));
+  }
+  rows.sort(byLeaveDesc);
+  return rows;
+}
+/* 判断一条记录是否包含指定休假类型：主类型匹配，或混合假拆分中包含该类型 */
+function recordHasType(r, t) {
+  if (r.type === t) return true;
+  const sp = parseSplit(r.split, r);
+  if (sp) return sp.some(x => x.type === t);
+  return false;
+}
+/* 收集指定模块可用的休假类型：按队伍显示对应类型 + 该队伍数据中的自定义类型 */
+function typeOptionsForView(view) {
+  const base = view === 'national' ? TYPE_MAIN : view === 'fulltime' ? TYPE_Z : [...new Set([...TYPE_MAIN, ...TYPE_Z])];
+  const set = new Set(base);
+  DATA.forEach(r => {
+    if (view === 'national' && r.g !== 'f') return;
+    if (view === 'fulltime' && r.g !== 'z') return;
+    if (r.type && r.type !== '其他') set.add(r.type);
+    const sp = parseSplit(r.split, r);
+    if (sp) sp.forEach(x => { if (x.type && x.type !== '其他') set.add(x.type); });
+  });
+  return [...set];
+}
+function syncControls(view) {
+  const st = state[view];
+  const toolbar = document.querySelector('[data-toolbar="' + view + '"]');
+  toolbar.querySelectorAll('.seg-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === st.mode));
+  toolbar.querySelectorAll('[data-ctl]').forEach(g => { g.style.display = g.dataset.ctl === st.mode ? 'flex' : 'none'; });
+  const dayIn = toolbar.querySelector('[data-input="day"]'); if (dayIn) dayIn.value = st.day;
+  const wkIn = toolbar.querySelector('[data-input="week"]'); if (wkIn) wkIn.value = st.week;
+  const w = weekRange(st.week);
+  const wkRange = toolbar.querySelector('[data-range="week"]'); if (wkRange) wkRange.textContent = fmtShort(w[0]) + ' — ' + fmtShort(w[1]);
+  const moIn = toolbar.querySelector('[data-input="month"]'); if (moIn) moIn.value = st.month;
+  const moRange = toolbar.querySelector('[data-range="month"]'); if (moRange) moRange.textContent = parseInt(st.month.slice(5), 10) + '月';
+  const sch = toolbar.querySelector('[data-search]'); if (sch) sch.value = st.search;
+  const tf = toolbar.querySelector('[data-typefilter]'); if (tf) tf.value = st.typeFilter;
+}
+
+/* ============ 渲染片段 ============ */
+function dtHtml(d, t) {
+  return '<div class="dt-cell"><div class="d">' + d + '</div><div class="t"><b>' + t + '</b> ' + (isAm(t) ? '上午' : '下午') + '</div></div>';
+}
+function badgeHtml(st) {
+  const m = { '休假': ['leave', '休假'], '已归队': ['back', '已归队'], '逾假未归队': ['over', '逾假未归队'] };
+  const c = m[st];
+  return '<span class="badge ' + c[0] + '"><span class="dot"></span>' + c[1] + '</span>';
+}
+function catChip(g) {
+  const ic = g === 'f'
+    ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>'
+    : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>';
+  return '<span class="cat-chip ' + g + '">' + ic + GROUP[g].label + '</span>';
+}
+function snChip(g, sn) {
+  return '<span class="sn-chip ' + g + '">' + GROUP[g].short + ' · ' + (sn ? esc(sn) : '—') + '</span>';
+}
+function snNum(g, sn) {
+  return sn ? '<span class="sn-num ' + g + '">' + esc(sn) + '</span>' : '<span class="sn-empty">—</span>';
+}
+function showEmpty(tbody, key, t, s) {
+  const wrap = tbody.closest('.table-wrap');
+  const panel = wrap.parentElement.querySelector('[data-empty="' + key + '"]');
+  wrap.style.display = 'none';
+  panel.style.display = 'block';
+  const ic = key === 'today'
+    ? '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="m9 16 2 2 4-4"/>'
+    : '<circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/><line x1="8" y1="11" x2="14" y2="11"/>';
+  panel.innerHTML = '<div class="empty">' +
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' + ic + '</svg>' +
+    '<div class="t">' + t + '</div><div class="s">' + s + '</div></div>';
+}
+function showTable(tbody) {
+  const wrap = tbody.closest('.table-wrap');
+  wrap.style.display = '';
+  const panel = wrap.parentElement.querySelector('.empty-panel');
+  if (panel) panel.style.display = 'none';
+}
+
+/* ============ 今日休假总览 ============ */
+let todayFilter = 'leave';   // leave / over / out / back
+function todayPool(f) {
+  if (f === 'over') return DATA.filter(r => effStatus(r) === '逾假未归队');
+  if (f === 'out') return DATA.filter(r => r.ld === TODAY);
+  if (f === 'back') return DATA.filter(r => r.rd === TODAY);
+  return DATA.filter(r => effStatus(r) === '休假');
+}
+function renderToday() {
+  const rows = todayPool(todayFilter);
+  rows.sort(byLeaveDesc);
+  const seq = seqMap();
+  const cntLeave = todayPool('leave').length;
+  const cntOver = todayPool('over').length;
+  const cntOut = todayPool('out').length;
+  const cntBack = todayPool('back').length;
+
+  document.getElementById('todayStats').innerHTML =
+    statCard('blue', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>', cntLeave, '今日在休（截至 08:00）', 'leave') +
+    statCard('red', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>', cntOver, '逾假未归队', 'over') +
+    statCard('orange', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><polyline points="5 12 12 5 19 12"/></svg>', cntOut, '今日离队', 'out') +
+    statCard('green', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><polyline points="19 12 12 19 5 12"/></svg>', cntBack, '今日归队', 'back');
+
+  const tb = document.getElementById('todayBody');
+  if (!rows.length) {
+    showEmpty(tb, 'today', '当前筛选条件下无记录', '可点击上方统计卡切换查看其他人员，或「新增记录」补充');
+    return;
+  }
+  showTable(tb);
+  tb.innerHTML = rows.map(r =>
+    '<tr class="row-click' + (effStatus(r) === '逾假未归队' ? ' row-over' : '') + '" data-id="' + r.id + '">' +
+    '<td>' + snChip(r.g, seq[r.id]) + '</td>' +
+    '<td><div class="td-name">' + esc(r.n) + '</div></td>' +
+    '<td>' + (esc(r.rk) || '—') + '</td>' +
+    '<td class="td-num">' + telHtml(r.ph) + '</td>' +
+    '<td>' + dtHtml(r.ld, r.lt) + '</td>' +
+    '<td>' + dtHtml(r.rd, r.rt) + '</td>' +
+    '<td class="td-types">' + typeBadgeHtml(r) + '</td>' +
+    '<td>' + (esc(r.rm) || '—') + '</td>' +
+    '<td>' + badgeHtml(effStatus(r)) + '</td></tr>'
+  ).join('');
+}
+function statCard(cls, ic, num, lbl, tf) {
+  return '<div class="stat-card tf-card' + (tf === todayFilter ? ' active' : '') + '" data-tf="' + tf + '"><div class="stat-ico ' + cls + '">' + ic + '</div>' +
+    '<div><div class="stat-num">' + num + '</div><div class="stat-lbl">' + lbl + '</div></div></div>';
+}
+
+/* ============ 列表视图 ============ */
+function renderList(view) {
+  const rows = filterRecords(view);
+  const seq = seqMap();
+  const st = state[view];
+  const tb = document.querySelector('[data-tbody="' + view + '"]');
+  if (!rows.length) {
+    showEmpty(tb, view, '当前筛选条件下无记录', '试试切换筛选方式或调整日期范围');
+    document.querySelector('[data-count="' + view + '"]').innerHTML =
+      '共 <b>0</b> 条记录' +
+      ' · <span><span class="dot" style="background:var(--blue)"></span>休假 <b>0</b></span>' +
+      ' · <span><span class="dot" style="background:var(--green)"></span>已归队 <b>0</b></span>' +
+      ' · <span><span class="dot" style="background:var(--red)"></span>逾假未归队 <b>0</b></span>';
+    const ms = document.querySelector('[data-msummary="' + view + '"]');
+    if (ms) ms.style.display = 'none';
+    if (view === 'all') { const ts = document.getElementById('typeSummary'); if (ts) ts.style.display = 'none'; }
+    return;
+  }
+  if (st.mode === 'month') {
+    /* 月视图：只展示合计表，明细在主列表由点击展开；隐藏下方主列表 */
+    const wrap = tb.closest('.table-wrap');
+    if (wrap) wrap.style.display = 'none';
+    const panel = tb.closest('.table-wrap').parentElement.querySelector('[data-empty="' + view + '"]');
+    if (panel) panel.style.display = 'none';
+    const sts = rows.map(r => effStatusIn(r, st));
+    const cnt = s => sts.filter(x => x === s).length;
+    document.querySelector('[data-count="' + view + '"]').innerHTML =
+      '共 <b>' + rows.length + '</b> 条记录' +
+      ' · <span><span class="dot" style="background:var(--blue)"></span>休假 <b>' + cnt('休假') + '</b></span>' +
+      ' · <span><span class="dot" style="background:var(--green)"></span>已归队 <b>' + cnt('已归队') + '</b></span>' +
+      ' · <span><span class="dot" style="background:var(--red)"></span>逾假未归队 <b>' + cnt('逾假未归队') + '</b></span>';
+    renderMonthSummary(view, rows, st);
+    if (view === 'all') renderTypeSummary();
+    return;
+  }
+  showTable(tb);
+  {
+    const withSn = view !== 'all';
+    tb.innerHTML = rows.map(r => {
+      const base =
+        '<td><div class="td-name">' + esc(r.n) + '</div></td>' +
+        '<td>' + (esc(r.rk) || '—') + '</td>' +
+        '<td class="td-num">' + telHtml(r.ph) + '</td>' +
+        '<td>' + dtHtml(r.ld, r.lt) + '</td>' +
+        '<td>' + dtHtml(r.rd, r.rt) + '</td>' +
+        '<td class="td-types">' + typeBadgeHtml(r, st.mode) + '</td>' +
+        '<td>' + (esc(r.rm) || '—') + '</td>' +
+        '<td>' + badgeHtml(effStatusIn(r, st)) + '</td>';
+      const head = withSn ? '<td>' + snNum(r.g, seq[r.id]) + '</td>' : '<td>' + catChip(r.g) + '</td>';
+      return '<tr class="row-click' + (effStatusIn(r, st) === '逾假未归队' ? ' row-over' : '') + '" data-id="' + r.id + '">' + head + base + '</tr>';
+    }).join('');
+  }
+  const sts = rows.map(r => effStatusIn(r, st));
+  const cnt = s => sts.filter(x => x === s).length;
+  document.querySelector('[data-count="' + view + '"]').innerHTML =
+    '共 <b>' + rows.length + '</b> 条记录' +
+    ' · <span><span class="dot" style="background:var(--blue)"></span>休假 <b>' + cnt('休假') + '</b></span>' +
+    ' · <span><span class="dot" style="background:var(--green)"></span>已归队 <b>' + cnt('已归队') + '</b></span>' +
+    ' · <span><span class="dot" style="background:var(--red)"></span>逾假未归队 <b>' + cnt('逾假未归队') + '</b></span>';
+  renderMonthSummary(view, rows, st);
+  if (view === 'all') renderTypeSummary();
+}
+/* all 视图顶部：按类型累加的休假天数合计（混合假按精确日期逐日拆分计入）；month 模式统计当月，其余统计全年 */
+function renderTypeSummary() {
+  const box = document.getElementById('typeSummary');
+  if (!box) return;
+  const rows = filterRecords('all');
+  if (!rows.length) { box.style.display = 'none'; return; }
+  const st = state.all;
+  let s, e, period;
+  if (st.mode === 'month') {
+    const p = st.month.split('-').map(Number);
+    s = st.month + '-01'; e = dateKey(new Date(p[0], p[1], 0));
+    period = p[0] + ' 年 ' + p[1] + ' 月';
+  } else if (st.mode === 'week') {
+    const w = weekRange(st.week);
+    s = w[0]; e = w[1];
+    period = fmtShort(s) + ' — ' + fmtShort(e);
+  } else if (st.mode === 'day') {
+    s = st.day; e = st.day;
+    period = fmtShort(s);
+  } else {
+    s = YEAR + '-01-01'; e = YEAR + '-12-31';
+    period = YEAR + ' 全年';
+  }
+  const by = {};
+  rows.forEach(r => typeDaysIn(r, s, e).forEach(x => { by[x.type] = (by[x.type] || 0) + x.days; }));
+  const kw = (st.search || '').trim();
+  const types = Object.keys(by).sort((a, b) => by[b] - by[a]);
+  const total = types.reduce((t, k) => t + by[k], 0);
+  box.style.display = '';
+  box.innerHTML =
+    '<div class="ts-head"><span class="ts-title">' + (kw ? '「' + esc(kw) + '」休假合计' : '全部人员休假合计') + '</span>' +
+    '<span class="ts-sub">' + period + ' · ' + rows.length + ' 条记录 · ' + types.length + ' 种类型（混合假已按日拆分）</span></div>' +
+    '<div class="ts-body">' +
+      types.map(t => {
+        const c = TYPE_COLORS[t] || '#64748B';
+        return '<span class="type-badge" title="' + esc(t) + '">' + esc(t) + ' <b>' + by[t] + '</b> 天</span>';
+      }).join('') +
+      '<span class="ts-total">合计 <b>' + total + '</b> 天</span>' +
+    '</div>';
+}
+function renderMonthSummary(view, rows, st) {
+  const ms = document.querySelector('[data-msummary="' + view + '"]');
+  if (!ms) return;
+  if (st.mode !== 'month') { ms.style.display = 'none'; return; }
+  const p = st.month.split('-').map(Number);
+  const s = st.month + '-01', e = dateKey(new Date(p[0], p[1], 0));
+  const map = {};
+  rows.forEach(r => {
+    const k = r.g + '|' + r.n;
+    if (!map[k]) map[k] = { g: r.g, n: r.n, by: {}, last: r.ld };
+    else if (r.ld > map[k].last) map[k].last = r.ld;
+    typeDaysIn(r, s, e).forEach(x => {
+      map[k].by[x.type] = (map[k].by[x.type] || 0) + x.days;
+    });
+  });
+  const people = Object.values(map);
+  if (!people.length) { ms.style.display = 'none'; return; }
+  const tot = p2 => Object.values(p2.by).reduce((a, b) => a + b, 0);
+  people.sort((a, b) => b.last.localeCompare(a.last) || a.n.localeCompare(b.n, 'zh'));
+  const sub = document.querySelector('[data-msub="' + view + '"]');
+  if (sub) sub.textContent = p[0] + ' 年 ' + p[1] + ' 月 · 共 ' + people.length + ' 人休假（单位：天）。点击任意人员行，可在下方展开其本月具体休假明细';
+  document.getElementById('msHead-' + view).innerHTML =
+    '<tr><th style="width:64%">姓名（队伍）</th><th>合计（天）</th></tr>';
+  document.getElementById('msBody-' + view).innerHTML = people.map(p2 =>
+    '<tr class="ms-row-click" data-k="' + p2.g + '|' + esc(p2.n) + '"><td><div class="td-name">' + esc(p2.n) +
+    '</div><div class="td-sub">' + GROUP[p2.g].label + '</div></td>' +
+    '<td class="td-num sum-total">' + tot(p2) + '<span class="ms-arrow">▾</span></td></tr>'
+  ).join('');
+  ms.style.display = '';
+}
+
+function msDetailHtml(view, key, rows, s, e) {
+  const withSn = view !== 'all';
+  const seq = seqMap();
+  const st = state[view];
+  const list = rows.slice().sort((a, b) => b.ld.localeCompare(a.ld) || b.lt.localeCompare(a.lt) || b.id - a.id);
+  return '<tr class="ms-detail-row" data-k="' + esc(key) + '"><td colspan="2"><div class="ms-detail-wrap">' +
+    (list.length
+      ? '<table class="data ms-subtable"><thead><tr>' + (withSn ? '<th>序号</th>' : '<th>类别</th>') +
+        '<th>姓名</th><th>衔级</th><th>电话</th><th>离队时间</th><th>归队时间</th><th>请假类型</th><th>假条备注</th><th>状态</th></tr></thead><tbody>' +
+        list.map(r => '<tr>' +
+          (withSn ? '<td>' + snNum(r.g, seq[r.id]) + '</td>' : '<td>' + catChip(r.g) + '</td>') +
+          '<td><div class="td-name">' + esc(r.n) + '</div></td>' +
+          '<td>' + (esc(r.rk) || '—') + '</td>' +
+          '<td class="td-num">' + telHtml(r.ph) + '</td>' +
+          '<td>' + dtHtml(r.ld, r.lt) + '</td>' +
+          '<td>' + dtHtml(r.rd, r.rt) + '</td>' +
+          '<td class="td-types">' + typeBadgeHtml(r, st.mode) + '</td>' +
+          '<td>' + (esc(r.rm) || '—') + '</td>' +
+          '<td>' + badgeHtml(effStatusIn(r, st)) + '</td></tr>').join('') +
+        '</tbody></table>'
+      : '<div class="ms-detail-empty">本月无休假明细</div>') +
+    '</div></td></tr>';
+}
+
+/* ============ 月度分布图 ============ */
+function renderChart() {
+  /* 搜索时图表联动：关键词来自「所有人员」视图搜索框；有词则只统计匹配人员 */
+  const kw = (state.all.search || '').trim();
+  const pool = kw ? DATA.filter(r => r.n.includes(kw) || String(r.ph ?? '').includes(kw)) : DATA;
+  const months = [], starts = [], ends = [];
+  months.push(String(YEAR - 1).slice(2) + '.12'); starts.push((YEAR - 1) + '-12-01'); ends.push((YEAR - 1) + '-12-31');
+  for (let i = 1; i <= 12; i++) {
+    months.push(i + '月');
+    starts.push(YEAR + '-' + pad(i) + '-01');
+    ends.push(YEAR + '-' + pad(i) + '-' + new Date(YEAR, i, 0).getDate());
+  }
+  const counts = months.map(() => ({ f: 0, z: 0 }));
+  pool.forEach(r => {
+    counts.forEach((c, idx) => {
+      const d = overlapDays(r, starts[idx], ends[idx]);
+      if (d > 0) c[r.g] += d;
+    });
+  });
+  const max = Math.max(1, ...counts.map(c => c.f + c.z));
+  document.getElementById('monthChart').innerHTML = counts.map((c, i) => {
+    const total = c.f + c.z;
+    const hf = Math.round(c.f / max * 100), hz = Math.round(c.z / max * 100);
+    const seg = (c.f ? '<div class="bar-seg bar-f" style="height:' + hf + '%"></div>' : '') +
+                (c.z ? '<div class="bar-seg bar-z" style="height:' + hz + '%"></div>' : '') +
+                (total ? '' : '<div class="bar-seg bar-zero"></div>');
+    const tip = months[i] + (kw ? '：' + kw + ' ' : '：') + total + ' 天' + (kw ? '' : '（国家队 ' + c.f + ' / 专职 ' + c.z + '）');
+    return '<div class="bar-col' + (total ? '' : ' zero') + '" title="' + tip + '">' +
+      '<div class="val">' + (total || '') + '</div>' + seg + '<div class="lbl">' + months[i] + '</div></div>';
+  }).join('');
+  const first = counts[0].f + counts[0].z;
+  const t1 = document.getElementById('chartTitle');
+  const t2 = document.getElementById('chartSub');
+  const totDays = counts.reduce((s, c) => s + c.f + c.z, 0);
+  if (t1) t1.textContent = kw ? '「' + kw + '」月度休假分布' : '月度休假分布';
+  if (t2) t2.textContent = kw ? '按离队月份统计该人员休假天数（共 ' + totDays + ' 天）' : '按离队月份统计各队伍休假天数（跨月已拆分到各月）';
+  document.getElementById('chartNote').textContent = first ? '含 ' + (YEAR - 1) + ' 年 12 月离队、跨入 ' + YEAR + ' 年的 ' + first + ' 天' : '';
+}
+
+/* ============ 编辑 / 新增 ============ */
+let editingId = null;
+let selStatus = 'auto';
+const STATUS_CLS = { auto: 'sel-auto', '休假': 'sel-leave', '已归队': 'sel-back', '逾假未归队': 'sel-over' };
+
+function setStatusSel(v) {
+  selStatus = v;
+  document.querySelectorAll('#f_status .status-opt').forEach(b => {
+    b.classList.remove('sel-auto', 'sel-leave', 'sel-back', 'sel-over');
+    if (b.dataset.st === v) b.classList.add(STATUS_CLS[v]);
+  });
+}
+function fillTypeOptions(g) {
+  const fType = document.getElementById('f_type');
+  if (g === 'z') {
+    fType.innerHTML = TYPE_Z.map(t => '<option value="' + t + '">' + t + '</option>').join('') +
+      '<option value="__custom__">其他（自定义命名）</option>';
+  } else {
+    fType.innerHTML = TYPE_MAIN_GROUPS.map(grp =>
+      '<optgroup label="' + grp.label + '">' + grp.items.map(t => '<option value="' + t + '">' + t + '</option>').join('') + '</optgroup>'
+    ).join('') + '<option value="__custom__">其他（自定义命名）</option>';
+  }
+}
+function openEdit(id, view) {
+  editingId = id;
+  const fh = document.getElementById('formHints');
+  if (fh) fh.open = window.innerWidth > 640;
+  const rec = id != null ? DATA.find(r => r.id === id) : null;
+  document.getElementById('editTitle').textContent = rec ? '编辑记录' : '新增记录';
+  document.getElementById('delBtn').style.display = rec ? 'inline-flex' : 'none';
+  document.getElementById('f_name').value = rec ? rec.n : '';
+  document.getElementById('f_grp').value = rec ? rec.g : (view === 'fulltime' ? 'z' : 'f');
+  fillTypeOptions(rec ? rec.g : (view === 'fulltime' ? 'z' : 'f'));
+  document.getElementById('f_rank').value = rec ? rec.rk : '';
+  document.getElementById('f_phone').value = rec ? rec.ph : '';
+  if (rec) {
+    document.getElementById('f_leave').value = rec.ld + 'T' + rec.lt;
+    document.getElementById('f_ret').value = rec.rd + 'T' + rec.rt;
+  } else {
+    const d0 = new Date(), d1 = new Date(d0.getTime() + 86400000);
+    document.getElementById('f_leave').value = dateKey(d0) + 'T08:00';
+    document.getElementById('f_ret').value = dateKey(d1) + 'T08:00';
+  }
+  document.getElementById('f_rm').value = rec ? rec.rm : '';
+  document.getElementById('f_split').value = rec ? (rec.split || '') : '';
+  const isZ = (rec ? rec.g : (view === 'fulltime' ? 'z' : 'f')) === 'z';
+  const t0 = rec ? (rec.type || (isZ ? '休假' : '轮休')) : (isZ ? '休假' : '轮休');
+  const fType = document.getElementById('f_type');
+  if ((isZ ? TYPE_Z : TYPE_MAIN).includes(t0)) { fType.value = t0; document.getElementById('f_type_custom_wrap').style.display = 'none'; }
+  else { fType.value = '__custom__'; document.getElementById('f_type_custom_wrap').style.display = ''; document.getElementById('f_type_custom').value = t0 === '其他' ? '' : t0; }
+  setStatusSel(rec ? (rec.st || 'auto') : 'auto');
+  showOverlay('edit');
+}
+
+/* ============ 导入 ============ */
+let importView = 'all';
+const H = {
+  name: ['姓名', '名字', '人员姓名', '人员'],
+  grp: ['类别', '分组', '人员类别', '队伍'],
+  sn: ['序号', '编号', '假条序号'],
+  sn1: ['序号1', '消防员序号'],
+  sn2: ['序号2', '专职序号'],
+  rank: ['衔级', '职级', '警衔', '职务'],
+  phone: ['电话', '手机', '联系电话', '手机号'],
+  leave: ['离队日期', '离队时间', '离队', '请假开始', '开始日期', '离开时间'],
+  ret: ['归队日期', '归队时间', '归队', '请假结束', '结束日期', '销假日期'],
+  remark: ['假条备注', '备注', '假条类型', '事由', '请假事由', '备注信息'],
+  type: ['请假类型', '类型', '休假类型', '假种类别'],
+  split: ['类型拆分', '拆分', '类型明细', '混合类型']
+};
+function detectHeader(row) {
+  const map = {};
+  row.forEach((c, i) => {
+    const s = String(c).replace(/^\uFEFF/, '').replace(/\s/g, '');
+    if (!s) return;
+    for (const k in H) {
+      if (!(k in map) && H[k].includes(s)) { map[k] = i; break; }
+    }
+  });
+  return map;
+}
+function normGrp(s) {
+  if (!s) return '';
+  if (/专职|政府/.test(s)) return 'z';
+  if (/国家/.test(s)) return 'f';
+  if (/消防员|消防士|消防长/.test(s)) return 'f';
+  return '';
+}
+function parseDT(s) {
+  if (s == null || s === '') return null;
+  if (s instanceof Date && !isNaN(s)) return { d: dateKey(s), t: pad(s.getHours()) + ':' + pad(s.getMinutes()) };
+  if (typeof s === 'number' && s > 20000 && s < 80000) {
+    const d = new Date(Math.round((s - 25569) * 86400 * 1000));
+    return { d: dateKey(d), t: pad(d.getHours()) + ':' + pad(d.getMinutes()) };
+  }
+  s = String(s).trim();
+  const m = s.match(/(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})(?:[ T]+(\d{1,2}):(\d{1,2}))?/);
+  if (!m) return null;
+  const h = m[4] != null ? parseInt(m[4], 10) : 18;
+  const mi = m[5] != null ? parseInt(m[5], 10) : 0;
+  return { d: m[1] + '-' + pad(+m[2]) + '-' + pad(+m[3]), t: pad(h) + ':' + pad(mi) };
+}
+function parseCSV(text) {
+  const rows = []; let row = [], cur = '', q = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (q) {
+      if (c === '"') { if (text[i + 1] === '"') { cur += '"'; i++; } else q = false; }
+      else cur += c;
+    } else if (c === '"') q = true;
+    else if (c === ',') { row.push(cur); cur = ''; }
+    else if (c === '\n') { row.push(cur); rows.push(row); row = []; cur = ''; }
+    else if (c === '\r') { /* skip */ }
+    else cur += c;
+  }
+  if (cur !== '' || row.length) { row.push(cur); rows.push(row); }
+  return rows.filter(r => r.some(c => String(c).trim() !== ''));
+}
+function importRows(arr) {
+  let map = detectHeader(arr[0] || []);
+  let start = 1;
+  if (!('name' in map) && arr.length > 1) { map = detectHeader(arr[1] || []); start = 2; }
+  if (!('name' in map)) { showImportResult('未识别到表头：需要包含「姓名」「离队时间」「归队时间」等列', true); return; }
+  const get = (r, k) => map[k] != null ? String(r[map[k]] ?? '').trim() : '';
+  let ok = 0, skip = 0, half = 0; const errs = [];
+  for (let i = start; i < arr.length; i++) {
+    const r = arr[i];
+    if (!r || r.every(c => String(c).trim() === '')) continue;
+    const name = get(r, 'name');
+    if (!name) { skip++; errs.push('第' + (i + 1) + '行缺姓名'); continue; }
+    let grp = normGrp(get(r, 'grp'));
+    if (!grp && importView !== 'all') grp = importView === 'national' ? 'f' : 'z';
+    if (!grp) grp = normGrp(get(r, 'rank'));
+    if (!grp) { skip++; errs.push('第' + (i + 1) + '行无法确定类别'); continue; }
+    const lv = parseDT(get(r, 'leave')), rt = parseDT(get(r, 'ret'));
+    if (!lv || !rt) { skip++; errs.push('第' + (i + 1) + '行日期格式错误'); continue; }
+    if (lv.d > rt.d || (lv.d === rt.d && lv.t >= rt.t)) { skip++; errs.push('第' + (i + 1) + '行归队不晚于离队'); continue; }
+    if (lv.t !== rt.t) half++;
+    const rec = { id: nextId(), g: grp, sn: null, n: name, rk: get(r, 'rank'), ph: get(r, 'phone'),
+      ld: lv.d, lt: lv.t, rd: rt.d, rt: rt.t, rm: get(r, 'remark'), split: get(r, 'split'),
+      type: get(r, 'type') || inferType(get(r, 'remark')) || '其他', st: '' };
+    DATA.push(rec); ok++;
+  }
+  save(); renderAll();
+  let msg = '导入成功 ' + ok + ' 条';
+  if (half) msg += '，其中 ' + half + ' 条离队/归队时间不一致（非整天数假条）';
+  if (skip) msg += '，跳过 ' + skip + ' 条（' + errs.slice(0, 3).join('；') + (errs.length > 3 ? ' 等' : '') + '）';
+  showImportResult(msg, ok === 0);
+  toast(ok > 0 ? '已导入 ' + ok + ' 条记录' : '未导入任何记录', ok > 0);
+}
+function loadXLSX(cb) {
+  if (window.XLSX) { cb(); return; }
+  const s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
+  s.onload = cb;
+  s.onerror = () => showImportResult('xlsx 解析组件加载失败（需要联网），请改用 CSV 文件导入', true);
+  document.head.appendChild(s);
+}
+function handleImportFile(file) {
+  const nm = file.name.toLowerCase();
+  if (nm.endsWith('.csv')) {
+    const rd = new FileReader();
+    rd.onload = () => importRows(parseCSV(rd.result));
+    rd.readAsText(file, 'utf-8');
+  } else if (nm.endsWith('.json')) {
+    const rd = new FileReader();
+    rd.onload = () => {
+      try {
+        const obj = JSON.parse(rd.result);
+        if (obj && obj.app === 'fjx_leave_2026' && Array.isArray(obj.records)) {
+          if (!obj.records.length) { showImportResult('备份文件内没有记录，已取消恢复（避免清空当前数据）', true); return; }
+          confirm('从备份恢复', '将用备份中的 ' + obj.records.length + ' 条记录覆盖当前全部 ' + DATA.length + ' 条数据（覆盖后无法撤销）。确定继续吗？', () => {
+            const n = restoreBackup(obj);
+            hideOverlay('import');
+            toast('已从备份恢复 ' + n + ' 条记录', true);
+          });
+        } else { showImportResult('该文件不是本系统的备份文件（缺少 app / records 字段）', true); }
+      } catch (err) { showImportResult('JSON 解析失败：' + err.message, true); }
+    };
+    rd.readAsText(file, 'utf-8');
+  } else if (nm.endsWith('.xlsx')) {
+    loadXLSX(() => {
+      const rd = new FileReader();
+      rd.onload = () => {
+        try {
+          const wb = XLSX.read(rd.result, { type: 'array' });
+          const ws = wb.Sheets[wb.SheetNames[0]];
+          importRows(XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' }));
+        } catch (err) { showImportResult('xlsx 解析失败：' + err.message, true); }
+      };
+      rd.readAsArrayBuffer(file);
+    });
+  } else showImportResult('不支持的文件类型，请上传 .xlsx、.csv 或备份 .json 文件', true);
+}
+function showImportResult(msg, isErr) {
+  /* 从备份恢复入口（导入弹窗未打开）时，错误/结果改用 toast，避免提示写进隐藏弹窗 */
+  const ov = document.getElementById('importOverlay');
+  if (!ov.classList.contains('show')) { toast(msg, !isErr); return; }
+  const el = document.getElementById('importResult');
+  el.style.display = 'block';
+  el.className = 'import-result' + (isErr ? ' err' : '');
+  el.textContent = msg;
+}
+
+/* ============ 导出 ============ */
+function escCsv(v) {
+  v = String(v ?? '');
+  if (/[",\n]/.test(v)) v = '"' + v.replace(/"/g, '""') + '"';
+  return v;
+}
+function downloadBlob(content, filename, type) {
+  const blob = new Blob([content], { type });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = filename;
+  document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 100);
+  return filename;
+}
+function nowHM() {
+  const d = new Date();
+  return pad(d.getHours()) + pad(d.getMinutes());
+}
+function exportView(view) {
+  let rows;
+  if (view === 'today') rows = todayPool(todayFilter);
+  else rows = filterRecords(view);
+  const head = ['类别', '序号', '姓名', '衔级', '电话', '离队时间', '归队时间', '请假类型', '类型拆分', '假条备注', '在位状态'];
+  const seq = seqMap();
+  const st = state[view];
+  const lines = rows.map(r => [GROUP[r.g].label, seq[r.id] || '', r.n, r.rk, '\t' + String(r.ph ?? '').trim(), r.ld + ' ' + r.lt, r.rd + ' ' + r.rt, r.type || '其他', r.split || '', r.rm, view === 'today' ? effStatus(r) : effStatusIn(r, st)].map(escCsv).join(','));
+  const label = view === 'today' ? '今日在休' : view === 'all' ? '所有人员' : view === 'national' ? '国家队消防员' : '政府专职消防员';
+  downloadBlob('\uFEFF' + head.join(',') + '\n' + lines.join('\n'), '休假记录_' + label + '_' + TODAY + '_' + nowHM() + '.csv', 'text/csv;charset=utf-8');
+  toast('已导出 ' + rows.length + ' 条记录', true);
+}
+
+/* ============ 请假类型与按人合计 ============ */
+const TYPE_MAIN = ['探望父母', '探望配偶', '年假', '轮休', '调休', '婚假', '陪产假', '病假', '事假'];
+const TYPE_MAIN_GROUPS = [
+  { label: '探亲休假', items: ['探望父母', '探望配偶', '年假'] },
+  { label: '日常休整', items: ['轮休', '调休'] },
+  { label: '其他类型', items: ['婚假', '陪产假', '病假', '事假'] }
+];
+const TYPE_Z = ['休假', '婚假', '陪产假', '病假', '事假', '调休'];
+const TYPE_COLORS = { '轮休': '#1461B3', '年假': '#15803D', '调休': '#7C3AED', '事假': '#C2410C', '病假': '#B91C1C', '休假': '#0E7490', '探望父母': '#B45309', '探望配偶': '#D97706', '婚假': '#BE185D', '陪产假': '#0F766E' };
+function typeBadge(t) {
+  const ty = t || '其他';
+  const c = TYPE_COLORS[ty] || '#64748B';
+  return '<span class="type-badge" style="background:' + c + '1A;color:' + c + '">' + esc(ty) + '</span>';
+}
+function telHtml(ph) {
+  const p = String(ph ?? '').trim();
+  if (!p) return '—';
+  return '<a class="tel-link" href="tel:' + esc(p) + '" onclick="event.stopPropagation()">' + esc(p) + '</a>';
+}
+/* 有类型拆分时，列表类型列展示拆分明细（与统计同口径）；mode 控制跨期标记：week 只标跨周、month 只标跨月 */
+function typeBadgeHtml(r, mode) {
+  const sp = parseSplit(r.split, r);
+  const days = leaveDays(r);
+  let out = '';
+  if (!sp) {
+    const c = TYPE_COLORS[r.type] || '#64748B';
+    out = '<span class="type-badge" style="background:' + c + '1A;color:' + c + '">' + esc(r.type || '其他') + ' ' + days + '天</span>';
+  } else if (sp[0].dates) {
+    const parts = typeDaysIn(r, '0000-01-01', '9999-12-31');
+    out = parts.map(x => {
+      const c = TYPE_COLORS[x.type] || '#64748B';
+      const tip = '具体日期：' + (x.dates || []).map(d => d.slice(5).replace('-', '.')).join('、');
+      return '<span class="type-badge" title="' + esc(tip) + '" style="background:' + c + '1A;color:' + c + '">' + esc(x.type) + ' ' + x.days + '天</span>';
+    }).join('');
+  }
+  out += daysMismatchFlag(r, days);
+  return out + recFlags(r, mode);
+}
+/* 从假条备注中解析休假天数总和：先排除4位年份、X月X日、X.X日期等非天数字，再提取1-3位数字；无数字返回 null */
+function remarkDays(rm) {
+  if (!rm) return null;
+  let cleaned = String(rm)
+    .replace(/\d{4}/g, '')
+    .replace(/\d{1,2}月\d{1,2}日?/g, '')
+    .replace(/\d{1,2}\.\d{1,2}(?!\d)/g, '')
+    .replace(/\d{1,2}、\d{1,2}(?!\d)/g, '');
+  const nums = cleaned.match(/\d{1,3}/g);
+  if (!nums || !nums.length) return null;
+  return nums.reduce((s, n) => s + parseInt(n, 10), 0);
+}
+/* 实际休假天数与假条备注合计天数不一致时的红色标识 */
+function daysMismatchFlag(r, actual) {
+  const rd = remarkDays(r.rm);
+  if (rd == null || rd === actual) return '';
+  return '<span class="rec-flag mismatch" title="实际休假 ' + actual + ' 天，假条备注合计 ' + rd + ' 天">与实际休假天数不符</span>';
+}
+/* 休假明细标记：跨月 / 跨周 / 混合假。按月查询只标跨月，按周查询只标跨周，其余模式全标 */
+function recFlags(r, mode) {
+  let s = '';
+  const crossMonth = r.ld.slice(0, 7) !== r.rd.slice(0, 7);
+  const crossWeek = mondayOf(r.ld) !== mondayOf(r.rd);
+  if (mode === 'week') {
+    if (crossWeek) s += '<span class="rec-flag week" title="跨周休假：' + esc(r.ld) + ' → ' + esc(r.rd) + '，跨过自然周（周一至周日）">跨周</span>';
+  } else if (mode === 'month') {
+    if (crossMonth) s += '<span class="rec-flag cross" title="跨月休假：' + esc(r.ld) + ' → ' + esc(r.rd) + '，天数已按各月拆分统计">跨月</span>';
+  } else {
+    if (crossMonth) s += '<span class="rec-flag cross" title="跨月休假：' + esc(r.ld) + ' → ' + esc(r.rd) + '，天数已按各月拆分统计">跨月</span>';
+    if (crossWeek) s += '<span class="rec-flag week" title="跨周休假：' + esc(r.ld) + ' → ' + esc(r.rd) + '，跨过自然周（周一至周日）">跨周</span>';
+  }
+  if (parseSplit(r.split, r)) s += '<span class="rec-flag mixed" title="混合休假：一条假条包含多种请假类型">混合</span>';
+  return s;
+}
+function inferType(rm) {
+  rm = rm || '';
+  if (rm.includes('轮休')) return '轮休';
+  if (rm.includes('年假')) return '年假';
+  if (rm.includes('调休')) return '调休';
+  if (rm.includes('事假')) return '事假';
+  if (rm.includes('休假')) return '休假';
+  for (const t of ['探望父母', '探望配偶', '陪产假', '婚假', '探亲假', '产假', '病假', '工伤假', '育儿假', '护理假', '丧假'])
+    if (rm.includes(t)) return t;
+  return '其他';
+}
+function leaveDays(r) { return Math.max(0, Math.round((new Date(r.rd) - new Date(r.ld)) / 86400000)); }
+/* 区间内各类型天数：精确日期拆分→逐日交集；比例拆分→按区间实休天数比例分配 */
+function typeDaysIn(rec, s, e) {
+  const sp = parseSplit(rec.split, rec);
+  if (!sp) return [{ type: rec.type || '其他', days: overlapDays(rec, s, e) }];
+  const out = {};
+  sp.forEach(x => x.dates.forEach(d => { if (d >= s && d <= e && onLeave(rec, d)) out[x.type] = (out[x.type] || 0) + 1; }));
+  const arr = Object.keys(out).map(t => ({ type: t, days: out[t], dates: [].concat.apply([], sp.filter(x => x.type === t).map(x => x.dates)).filter(d => d >= s && d <= e && onLeave(rec, d)) }));
+  return arr.length ? arr : [{ type: rec.type || '其他', days: 0, dates: [] }];
+}
+/* 区间内实际休假天数：逐日按 08:00 判定口径统计（与某日/某周/某月筛选一致） */
+function overlapDays(r, s, e) {
+  let n = 0, d = s;
+  while (d <= e) { if (onLeave(r, d)) n++; d = addDays(d, 1); }
+  return n;
+}
+/* 类型天数拆分：支持一条假条内多种请假类型，如「轮休3、调休3」 */
+function parseSplit(s, rec) {
+  if (!s) return null;
+  const parts = String(s).split(/[、，,;；\/]+/).map(x => x.trim()).filter(Boolean);
+  /* —— 日期精确模式：7.15-7.17轮休、7.18调休（单日、区间均可；跨年自动推断）—— */
+  const isDate = p => /^(?:\d{4}\.)?\d{1,2}\.\d{1,2}(?:\s*-\s*(?:\d{4}\.)?\d{1,2}\.\d{1,2})?\s*[^\d\s].*$/.test(p) ||
+    /^[^\d]+?\s*(?:\d{4}\.)?\d{1,2}\.\d{1,2}(?:\s*-\s*(?:\d{4}\.)?\d{1,2}\.\d{1,2})?$/.test(p);
+  if (parts.some(isDate)) {
+    if (!parts.every(isDate)) return null;
+    const baseY = rec ? +String(rec.ld).slice(0, 4) : new Date().getFullYear();
+    const segs = [];
+    for (const p of parts) {
+      let m;
+      if ((m = p.match(/^(?:(\d{4})\.)?(\d{1,2})\.(\d{1,2})(?:\s*-\s*(?:(\d{4})\.)?(\d{1,2})\.(\d{1,2}))?\s*([^\d\s].*)$/))) {
+        segs.push({ type: m[7].trim(), d1: { y: m[1] ? +m[1] : 0, m: +m[2], d: +m[3] }, d2: m[5] ? { y: m[4] ? +m[4] : 0, m: +m[5], d: +m[6] } : null });
+      } else if ((m = p.match(/^([^\d]+?)\s*(?:(\d{4})\.)?(\d{1,2})\.(\d{1,2})(?:\s*-\s*(?:(\d{4})\.)?(\d{1,2})\.(\d{1,2}))?$/))) {
+        segs.push({ type: m[1].trim(), d1: { y: m[2] ? +m[2] : 0, m: +m[3], d: +m[4] }, d2: m[6] ? { y: m[5] ? +m[5] : 0, m: +m[6], d: +m[7] } : null });
+      } else return null;
+      if (!segs[segs.length - 1].type) return null;
+    }
+    let prev = null;
+    for (const sg of segs) {
+      if (!sg.d1.y) {
+        if (prev && (sg.d1.m < prev.m || (sg.d1.m === prev.m && sg.d1.d < prev.d))) sg.d1.y = prev.y + 1;
+        else if (prev) sg.d1.y = prev.y;
+        else sg.d1.y = baseY;
+      }
+      if (sg.d2) {
+        if (!sg.d2.y) {
+          if (sg.d2.m < sg.d1.m || (sg.d2.m === sg.d1.m && sg.d2.d < sg.d1.d)) sg.d2.y = sg.d1.y + 1;
+          else sg.d2.y = sg.d1.y;
+        }
+        prev = sg.d2;
+      } else prev = sg.d1;
+    }
+    const out = [];
+    for (const sg of segs) {
+      const dates = [];
+      let t = new Date(sg.d1.y, sg.d1.m - 1, sg.d1.d);
+      const end = sg.d2 ? new Date(sg.d2.y, sg.d2.m - 1, sg.d2.d) : t;
+      while (t <= end) { dates.push(dateKey(t)); t = new Date(t.getFullYear(), t.getMonth(), t.getDate() + 1); }
+      out.push({ type: sg.type, days: dates.length, dates });
+    }
+    return out.length ? out : null;
+  }
+  /* 仅接受精确日期写法；比例式（如「轮休3、调休3」）不再支持，按单一类型处理 */
+  return null;
+}
+function buildBackup() {
+  return {
+    app: 'fjx_leave_2026', version: 2, exportedAt: nowStr(),
+    records: DATA.map(r => ({ g: r.g, sn: r.sn, n: r.n, rk: r.rk, ph: r.ph, ld: r.ld, lt: r.lt, rd: r.rd, rt: r.rt, rm: r.rm, type: r.type, split: r.split, st: r.st }))
+  };
+}
+function nowStr() { const d = new Date(); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes()); }
+function backupInfo() { try { return localStorage.getItem(BK_KEY); } catch (e) { return null; } }
+function isDue(last) {
+  if (!last) return true;
+  return addDays(last, 7) <= TODAY;
+}
+function markBackedUp() {
+  try { localStorage.setItem(BK_KEY, TODAY); } catch (e) { /* ignore */ }
+  idbSet('lastBackup', TODAY);
+  hideBanner(); renderBackupMeta();
+}
+function idbOpen() {
+  return new Promise((res, rej) => {
+    try {
+      const rq = indexedDB.open(BK_IDB, 1);
+      rq.onupgradeneeded = () => { try { rq.result.createObjectStore(BK_STORE); } catch (e) { /* ignore */ } };
+      rq.onsuccess = () => res(rq.result);
+      rq.onerror = () => rej(rq.error);
+    } catch (e) { rej(e); }
+  });
+}
+function idbSet(key, val) {
+  return new Promise(res => {
+    idbOpen().then(db => {
+      const tx = db.transaction(BK_STORE, 'readwrite');
+      tx.objectStore(BK_STORE).put(val, key);
+      tx.oncomplete = () => { db.close(); res(true); };
+      tx.onerror = () => { db.close(); res(false); };
+    }).catch(() => res(false));
+  });
+}
+function idbGet(key) {
+  return new Promise(res => {
+    idbOpen().then(db => {
+      const tx = db.transaction(BK_STORE, 'readonly');
+      const q = tx.objectStore(BK_STORE).get(key);
+      q.onsuccess = () => { db.close(); res(q.result); };
+      q.onerror = () => { db.close(); res(null); };
+    }).catch(() => res(null));
+  });
+}
+async function writeBackupToDir() {
+  if (!backupDirHandle) return false;
+  try {
+    let perm = 'granted';
+    if (backupDirHandle.queryPermission) {
+      perm = await backupDirHandle.queryPermission({ mode: 'readwrite' });
+      if (perm === 'prompt') {
+        try { perm = await backupDirHandle.requestPermission({ mode: 'readwrite' }); } catch (e) { perm = 'prompt'; }
+      }
+    }
+    if (perm !== 'granted') return false;
+    const fh = await backupDirHandle.getFileHandle(BK_NAME, { create: true });
+    const w = await fh.createWritable();
+    await w.write(JSON.stringify(buildBackup(), null, 2));
+    await w.close();
+    return true;
+  } catch (e) { return false; }
+}
+async function pickBackupDir() {
+  if (!window.showDirectoryPicker) {
+    toast('当前浏览器不支持指定文件夹，已直接保存备份文件（手机端保存到下载目录即可）');
+    downloadBackup();
+    return;
+  }
+  try {
+    if (backupDirHandle) {
+      try {
+        let perm = await backupDirHandle.queryPermission({ mode: 'readwrite' });
+        if (perm === 'prompt') perm = await backupDirHandle.requestPermission({ mode: 'readwrite' });
+        if (perm === 'granted') {
+          renderBackupMeta();
+          toast('已恢复授权：自动备份到「' + backupDirHandle.name + '」，无需重新选择', true);
+          return;
+        }
+      } catch (e) { /* 权限恢复失败，走重新选择 */ }
+    }
+    const dir = await window.showDirectoryPicker({ id: 'fjx-leave-backup', mode: 'readwrite' });
+    backupDirHandle = dir;
+    try { await idbSet('backupDir', dir); } catch (e) { /* ignore */ }
+    renderBackupMeta();
+    toast('已记住备份文件夹「' + dir.name + '」，以后打开页面自动备份到该文件夹', true);
+  } catch (e) { /* 用户取消 */ }
+}
+function downloadBackup() {
+  downloadBlob(JSON.stringify(buildBackup(), null, 2), BK_NAME, 'application/json');
+  markBackedUp();
+  toast('已下载备份文件「' + BK_NAME + '」，请到浏览器「下载」目录查看（下次自动备份在 7 天后）', true);
+}
+async function manualBackup() {
+  if (backupDirHandle) {
+    const ok = await writeBackupToDir();
+    if (ok) { markBackedUp(); toast('已备份到「' + backupDirHandle.name + '」（下次自动备份在 7 天后）', true); return; }
+    toast('写入文件夹失败，已改为下载备份文件');
+  }
+  downloadBackup();
+}
+function restoreBackup(obj) {
+  DATA = obj.records.map((r, i) => ({ ...r, id: i }));
+  _idSeq = DATA.length;
+  save(); renderAll();
+  return obj.records.length;
+}
+function showBanner() { const b = document.getElementById('backupBanner'); if (b) b.style.display = 'flex'; }
+function hideBanner() { const b = document.getElementById('backupBanner'); if (b) b.style.display = 'none'; }
+function renderBackupMeta() {
+  const el = document.getElementById('backupMeta');
+  const dirEl = document.getElementById('backupDirName');
+  const tipEl = document.getElementById('backupDirTip');
+  const btn = document.getElementById('backupDirBtn');
+  if (dirEl) dirEl.textContent = backupDirHandle ? backupDirHandle.name : '未设置';
+  const btnText = document.getElementById('backupDirBtnText');
+  if (btnText) btnText.textContent = backupDirHandle ? '更换 / 重新授权' : '选择备份文件夹';
+  if (tipEl) {
+    if (!backupDirHandle) {
+      tipEl.textContent = window.showDirectoryPicker ? '该自动写入功能需在电脑版 Chrome/Edge 上设置；手机端请用上方「下载备份文件」' : '当前浏览器不支持指定文件夹，备份请用「下载备份文件」保存';
+    } else if (window.showDirectoryPicker && backupDirHandle.queryPermission) {
+      backupDirHandle.queryPermission({ mode: 'readwrite' }).then(p => {
+        if (p === 'granted') tipEl.textContent = '已记住该文件夹，每 7 天自动写入，无需手动选择';
+        else if (p === 'prompt') tipEl.textContent = '已记住文件夹，点击按钮授权一次即可继续自动备份（不会重新选择）';
+        else tipEl.textContent = '权限已失效，点击按钮可重新授权或更换文件夹';
+      }).catch(() => { tipEl.textContent = '已记住该文件夹（点击按钮可重新授权）'; });
+    } else {
+      tipEl.textContent = '已记住该文件夹（当前浏览器可能无法跨页面保持，点击按钮可重新授权）';
+    }
+  }
+  if (!el) return;
+  const last = backupInfo();
+  el.innerHTML = last
+    ? '上次备份：<b>' + last + '</b> · 每 7 天自动提醒 / 自动写入；备份文件自动覆盖，仅保留最近一份'
+    : '尚未备份过 · 每 7 天自动提醒，请尽快完成首次备份';
+}
+function bannerMsg(last) {
+  const el = document.getElementById('bannerMsg');
+  if (!el) return;
+  el.textContent = last
+    ? '距上次备份已超过 7 天，点击立即备份（备份文件自动覆盖旧文件，仅保留最近一份）'
+    : '尚未完成首次数据备份，建议立即备份；此后每 7 天自动提醒一次';
+}
+function restoreBackupDir() {
+  idbGet('backupDir').then(h => { if (h) { backupDirHandle = h; renderBackupMeta(); } });
+}
+async function checkAutoBackup() {
+  const last = backupInfo();
+  renderBackupMeta();
+  if (last && !isDue(last)) { hideBanner(); return; }
+  const lb = await idbGet('lastBackup');
+  if (!last && lb && !isDue(lb)) { hideBanner(); renderBackupMeta(); return; }
+  /* 首次备份：显示横幅引导 */
+  if (!last && !lb) { bannerMsg(null); showBanner(); return; }
+  /* 到期：仅当文件夹写权限仍然有效时自动写入；否则不静默下载（非用户手势会被浏览器拦截），显示横幅请用户手动点 */
+  if (backupDirHandle) {
+    const ok = await writeBackupToDir();
+    if (ok) { markBackedUp(); return; }
+  }
+  bannerMsg(last); showBanner();
+}
+
+/* ============ 弹窗 / Toast / 确认 ============ */
+function showOverlay(id) { document.getElementById(id + 'Overlay').classList.add('show'); }
+function hideOverlay(id) { document.getElementById(id + 'Overlay').classList.remove('show'); }
+let toastTimer = null;
+function toast(msg, ok) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.toggle('ok', !!ok);
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
+}
+let confirmCb = null;
+let confirmCancelCb = null;
+function confirm(title, msg, cb, cancelCb, okLabel, cancelLabel) {
+  document.getElementById('confirmTitle').textContent = title;
+  document.getElementById('confirmMsg').textContent = msg;
+  confirmCb = cb; confirmCancelCb = cancelCb || null;
+  document.getElementById('confirmOkBtn').textContent = okLabel || '确定';
+  document.getElementById('confirmCancelBtn').textContent = cancelLabel || '取消';
+  showOverlay('confirm');
+}
+
+/* ============ 事件绑定 ============ */
+document.querySelectorAll('.nav-item,.top-tab').forEach(b => b.addEventListener('click', () => switchView(b.dataset.view)));
+
+document.querySelectorAll('[data-toolbar]').forEach(tb => {
+  const view = tb.dataset.toolbar;
+  tb.addEventListener('click', e => {
+    const segBtn = e.target.closest('.seg-btn');
+    if (segBtn) { state[view].mode = segBtn.dataset.mode; syncControls(view); renderList(view); return; }
+    const wkBtn = e.target.closest('[data-week]');
+    if (wkBtn) { state[view].week = mondayOf(addDays(state[view].week, parseInt(wkBtn.dataset.week, 10) * 7)); syncControls(view); renderList(view); return; }
+    const moBtn = e.target.closest('[data-month]');
+    if (moBtn) { state[view].month = addMonths(state[view].month, parseInt(moBtn.dataset.month, 10)); syncControls(view); renderList(view); return; }
+  });
+  tb.addEventListener('change', e => {
+    const tf = e.target.closest('.type-filter');
+    if (tf) { state[view].typeFilter = tf.value; renderList(view); if (view === 'all') renderChart(); return; }
+    const inp = e.target.closest('.ctl-input');
+    if (!inp) return;
+    const k = inp.dataset.input;
+    if (k === 'day') state[view].day = inp.value || TODAY;
+    else if (k === 'week') state[view].week = inp.value || TODAY;
+    else if (k === 'month') state[view].month = inp.value || TODAY.slice(0, 7);
+    syncControls(view); renderList(view);
+  });
+  tb.addEventListener('input', e => {
+    const s = e.target.closest('[data-search]');
+    if (s) {
+      state[view].search = s.value;
+      clearTimeout(searchTimers[view]);
+      searchTimers[view] = setTimeout(() => { renderList(view); if (view === 'all') renderChart(); }, 120);
+    }
+  });
+});
+
+document.querySelectorAll('tbody[data-tbody], #todayBody, #msBody-all, #msBody-national, #msBody-fulltime').forEach(tb =>
+  tb.addEventListener('click', e => {
+    const viewOf = t => t.dataset.tbody || t.id.replace('msBody-', '') || 'today';
+    const m = e.target.closest('tr.ms-row-click');
+    if (m) {
+      const view = viewOf(tb), st = state[view];
+      if (st && st.mode === 'month') {
+        const k = m.dataset.k;
+        const ex = Array.prototype.slice.call(tb.querySelectorAll('tr.ms-detail-row')).find(x => x.dataset.k === k);
+        const ar = m.querySelector('.ms-arrow');
+        if (ex) { ex.remove(); if (ar) ar.textContent = '▾'; m.classList.remove('open'); return; }
+        const p = st.month.split('-').map(Number);
+        const s = st.month + '-01', e2 = dateKey(new Date(p[0], p[1], 0));
+        const keyRows = filterRecords(view).filter(r => r.g + '|' + r.n === k);
+        m.insertAdjacentHTML('afterend', msDetailHtml(view, k, keyRows, s, e2));
+        if (ar) ar.textContent = '▴';
+        m.classList.add('open');
+        return;
+      }
+    }
+    const tr = e.target.closest('tr[data-id]');
+    if (tr) openEdit(parseInt(tr.dataset.id, 10), viewOf(tb));
+  })
+);
+
+document.querySelectorAll('[data-add]').forEach(b => b.addEventListener('click', () => openEdit(null, b.dataset.add)));
+document.querySelectorAll('[data-import]').forEach(b => b.addEventListener('click', () => {
+  importView = b.dataset.import;
+  document.getElementById('importResult').style.display = 'none';
+  showOverlay('import');
+}));
+document.querySelectorAll('[data-export]').forEach(b => b.addEventListener('click', () => exportView(b.dataset.export)));
+document.getElementById('todayExportBtn').addEventListener('click', () => exportView('today'));
+document.getElementById('todayStats').addEventListener('click', e => {
+  const card = e.target.closest('.tf-card');
+  if (!card) return;
+  todayFilter = card.dataset.tf;
+  renderToday();
+});
+
+/* 数据备份 */
+document.getElementById('backupBtn').addEventListener('click', () => { renderBackupMeta(); showOverlay('backup'); });
+document.getElementById('topBackupBtn').addEventListener('click', () => { renderBackupMeta(); showOverlay('backup'); });
+document.getElementById('backupNowBtn').addEventListener('click', manualBackup);
+document.getElementById('backupDirBtn').addEventListener('click', pickBackupDir);
+document.getElementById('backupRestoreBtn').addEventListener('click', () => { hideOverlay('backup'); document.getElementById('importFile').click(); });
+document.getElementById('bannerBackupBtn').addEventListener('click', manualBackup);
+document.getElementById('bannerCloseBtn').addEventListener('click', hideBanner);
+
+document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => hideOverlay(b.dataset.close)));
+document.querySelectorAll('.overlay').forEach(ov => ov.addEventListener('mousedown', e => { if (e.target === ov) ov.classList.remove('show'); }));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.overlay.show').forEach(o => o.classList.remove('show')); });
+
+/* 编辑弹窗 */
+document.getElementById('f_grp').addEventListener('change', () => { fillTypeOptions(document.getElementById('f_grp').value); });
+document.getElementById('f_type').addEventListener('change', () => {
+  const c = document.getElementById('f_type').value === '__custom__';
+  document.getElementById('f_type_custom_wrap').style.display = c ? '' : 'none';
+});
+document.querySelectorAll('#f_status .status-opt').forEach(b => b.addEventListener('click', () => setStatusSel(b.dataset.st)));
+document.getElementById('saveBtn').addEventListener('click', () => {
+  const name = document.getElementById('f_name').value.trim();
+  const g = document.getElementById('f_grp').value;
+  const rank = document.getElementById('f_rank').value.trim();
+  const phone = document.getElementById('f_phone').value.trim();
+  const lv = document.getElementById('f_leave').value;
+  const rt = document.getElementById('f_ret').value;
+  const rm = document.getElementById('f_rm').value.trim();
+  const split = document.getElementById('f_split').value.trim();
+  const selType = document.getElementById('f_type').value;
+  const typeVal = selType === '__custom__' ? (document.getElementById('f_type_custom').value.trim() || '其他') : selType;
+  if (!name) { toast('请填写姓名'); return; }
+  if (!lv || !rt) { toast('请填写离队与归队时间'); return; }
+  if (lv >= rt) { toast('归队时间必须晚于离队时间'); return; }
+  const ld = lv.slice(0, 10), lt = lv.slice(11).slice(0, 5);
+  const rd = rt.slice(0, 10), rtm = rt.slice(11).slice(0, 5);
+  if (split && !parseSplit(split, { ld, rd })) { toast('类型拆分格式有误：请按日期逐段填写，如「7.15-7.17轮休、7.18调休」'); return; }
+  const isNew = editingId == null;
+  const commitSave = finalName => {
+    if (!isNew) {
+      const rec = DATA.find(r => r.id === editingId);
+      if (!rec) return;
+      Object.assign(rec, { n: finalName, g, rk: rank, ph: phone, ld, lt, rd, rt: rtm, rm, type: typeVal, split,
+        st: selStatus === 'auto' ? '' : selStatus });
+    } else {
+      DATA.push({ id: nextId(), n: finalName, g, rk: rank, ph: phone, ld, lt, rd, rt: rtm, rm, type: typeVal,
+        sn: null, split, st: selStatus === 'auto' ? '' : selStatus });
+    }
+    save(); hideOverlay('edit');
+    renderAll();
+    let warn = lt !== rtm ? '（注意：离队 ' + lt + ' 与归队 ' + rtm + ' 时间不一致，非整天数假条）' : '';
+    const spc = split ? parseSplit(split, { ld, rd }) : null;
+    if (spc && spc[0].dates) {
+      const total = spc.reduce((a, x) => a + x.days, 0);
+      const days = Math.round((new Date(rd) - new Date(ld)) / 86400000);
+      if (total !== days) warn += '（提醒：拆分日期共 ' + total + ' 天，与假条 ' + days + ' 天不一致）';
+      if (spc.some(x => x.dates.some(d => d < ld || d > rd))) warn += '（提醒：拆分日期超出假条起止范围）';
+    }
+    toast((isNew ? '已新增记录' : '已保存修改') + warn, true);
+  };
+  commitSave(name);
+});
+document.getElementById('delBtn').addEventListener('click', () => {
+  const rec = DATA.find(r => r.id === editingId);
+  if (!rec) return;
+  confirm('删除记录', '确定删除「' + rec.n + '」的这条休假记录（' + rec.ld + ' ' + rec.lt + ' 至 ' + rec.rd + ' ' + rec.rt + '）吗？', () => {
+    DATA = DATA.filter(r => r.id !== editingId);
+    save(); hideOverlay('edit');
+    renderAll();
+    toast('已删除该记录');
+  });
+});
+document.getElementById('confirmOkBtn').addEventListener('click', () => {
+  hideOverlay('confirm');
+  if (confirmCb) { const cb = confirmCb; confirmCb = null; confirmCancelCb = null; cb(); }
+});
+document.getElementById('confirmCancelBtn').addEventListener('click', () => {
+  hideOverlay('confirm');
+  if (confirmCancelCb) { const cb = confirmCancelCb; confirmCancelCb = null; confirmCb = null; cb(); }
+  else confirmCb = null;
+});
+
+/* 导入 */
+const importZone = document.getElementById('importZone');
+importZone.addEventListener('click', () => document.getElementById('importFile').click());
+document.getElementById('importFile').addEventListener('change', e => {
+  const f = e.target.files[0];
+  if (f) handleImportFile(f);
+  e.target.value = '';
+});
+importZone.addEventListener('dragover', e => { e.preventDefault(); importZone.classList.add('drag'); });
+importZone.addEventListener('dragleave', () => importZone.classList.remove('drag'));
+importZone.addEventListener('drop', e => {
+  e.preventDefault(); importZone.classList.remove('drag');
+  const f = e.dataTransfer.files[0];
+  if (f) handleImportFile(f);
+});
+document.getElementById('tplBtn').addEventListener('click', () => {
+  const head = '类别,姓名,衔级,电话,离队时间,归队时间,请假类型,类型拆分,假条备注\n';
+  downloadBlob('\uFEFF' + head, '休假记录导入模板.csv', 'text/csv;charset=utf-8');
+  toast('模板已下载', true);
+});
+
+/* 一键清空所有休假数据（高危：二次确认；已设备份文件夹时先自动备份一份） */
+function clearAllData() {
+  if (!DATA.length) { toast('当前没有休假数据'); return; }
+  const n = DATA.length;
+  confirm('清空所有休假数据', '将清空全部 ' + n + ' 条休假记录，清空后页面无任何人员数据，只能通过「数据备份」文件恢复。建议先备份，确定清空吗？', async () => {
+    let backed = false;
+    try { backed = await writeBackupToDir(); } catch (e) { backed = false; }
+    DATA = [];
+    _idSeq = 1;
+    save();
+    state.all.search = '';
+    const si = document.querySelector('[data-search="all"]'); if (si) si.value = '';
+    renderAll();
+    hideOverlay('backup');
+    toast(backed ? '已清空 ' + n + ' 条记录，并已自动备份到指定文件夹' : '已清空 ' + n + ' 条记录', !backed);
+  }, null, '确定清空');
+}
+document.getElementById('clearAllBtn').addEventListener('click', clearAllData);
+document.getElementById('clearAllBtn2').addEventListener('click', clearAllData);
+
+/* ============ 初始化 ============ */
+/* 只渲染今日总览与当前视图（其他视图切到时由 switchView 渲染），减少每次操作后的 DOM 重建 */
+function renderAll() {
+  /* 刷新类型筛选下拉（按模块显示对应类型，新增自定义类型后自动出现，保留当前选择） */
+  document.querySelectorAll('.type-filter').forEach(sel => {
+    const view = sel.dataset.typefilter;
+    const opts = typeOptionsForView(view);
+    const cur = sel.value;
+    sel.innerHTML = '<option value="">全部类型</option>' + opts.map(t => '<option value="' + esc(t) + '">' + esc(t) + '</option>').join('');
+    sel.value = cur;
+  });
+  renderToday();
+  if (currentView !== 'today') renderList(currentView);
+  renderChart();
+}
+document.getElementById('sideDate').textContent = TODAY_FMT;
+/* 年份随当前年份自动变化（标题、副标题、导入模板示例） */
+document.title = '消防救援站 · ' + YEAR + '年度人员休假统计';
+document.querySelectorAll('[data-year]').forEach(el => { el.textContent = YEAR; });
+document.getElementById('todayStrong').textContent = TODAY_FMT;
+/* 初始化休假类型筛选下拉（按模块显示对应类型 + 数据中出现的自定义类型） */
+(function initTypeFilters() {
+  document.querySelectorAll('.type-filter').forEach(sel => {
+    const opts = typeOptionsForView(sel.dataset.typefilter);
+    sel.innerHTML = '<option value="">全部类型</option>' + opts.map(t => '<option value="' + esc(t) + '">' + esc(t) + '</option>').join('');
+  });
+})();
+
+
+renderAll();
+restoreBackupDir();
+checkAutoBackup();
+
+</script>
+</body>
+</html>
